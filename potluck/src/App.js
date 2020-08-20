@@ -1,13 +1,46 @@
-import React from 'react';
-import './App.css';
+import React, { useState } from "react";
+// import { BrowserRouter as Router } from "react-router-dom";
+import { Route } from "react-router-dom";
 
-function App() {
+//import styled from "styled-components";
+import "./App.css";
+
+// Components
+import Login from "./component/Login";
+import Registration from "./component/Registration";
+import Home from "./component/Home";
+import Navigation from "./component/Navigation";
+import Event from "./component/Event";
+import Search from "./component/Search";
+
+const App = () => {
+  const [data, SetData] = useState([]);
+
   return (
     <div className="App">
-      <h1>Over-Write These 2 text Elements and Start Adding your Components in Routes!</h1>
-      <h2>Above all: HAVE FUN!!!</h2>
+      <Navigation />
+
+      <Route path="/registration">
+        <Registration />
+      </Route>
+
+      <Route path="/Login">
+        <Login />
+      </Route>
+
+      <Route path="/Event">
+        <Event />
+      </Route>
+
+      <Route path="/Search">
+        <Search />
+      </Route>
+
+      <Route exact path="/">
+        <Home />
+      </Route>
     </div>
   );
-}
+};
 
 export default App;
