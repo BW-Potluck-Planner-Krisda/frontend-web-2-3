@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
-import "./components/Registration";
-import "./components/Home";
-import "./components/Navigation";
-import "./components/Event";
-import "./components/Search";
-import "./components/Display";
-import "./components/Login";
+import Registration from "./components/Registration";
+import Home from "./components/Home";
+import Navigation from "./components/Navigation";
+import Event from "./components/Event";
+import Search from "./components/Search";
+import Display from "./components/Display";
+import Login from "./components/Login";
 
 function App() {
   return (
