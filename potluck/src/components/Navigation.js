@@ -1,7 +1,5 @@
-import react from "react";
+import React from "react";
 
 function Navigation() {
-  return console.log("Navigation");
+  return;
 }
-
-export default Navigation;

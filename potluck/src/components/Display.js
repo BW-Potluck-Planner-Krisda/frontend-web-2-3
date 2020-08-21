@@ -1,7 +1,7 @@
 import React from "react";
 
 function Display() {
-  return console.log("Display");
+  return <h1>Hello from display</h1>;
 }
 
 export default Display;
