@@ -1,7 +1,7 @@
 import React from "react";
 
 function Event() {
-  return <>console.log("Event");</>;
+  return <h1>Hello from event</h1>;
 }
 
 export default Event;

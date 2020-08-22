@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useForm } from "react-hook-form";
 import * as yup from "yup";
-
-//need api to send and get data from
+import { useForm } from "react-hook-form";
 
 // first route from app "/"
 
@@ -16,6 +14,10 @@ const Schema = yup.object().shape({
 });
 
 function Login() {
+  // hook form
+
+  const { reset } = useForm({});
+
   //setting up state
 
   const [buttonDisabled, setButtonDisabled] = useState("");
@@ -35,8 +37,8 @@ function Login() {
     console.log("form submitted!");
     axios
       .post("https://reqres.in/api/users", formState)
-      .then((res) => console.log(res.data), "success!!!")
-      .catch((err) => console.log(err), "Failed");
+      .then((res) => console.log("Success!!!", res.data))
+      .catch((err) => console.log("Failed", err));
   };
 
   const validate = (e) => {
@@ -88,7 +90,7 @@ function Login() {
           onChange={onChange}
         />
         {errorState.username.length > 0 ? (
-          <p classname="error">{errorState.username}</p>
+          <p className="error">{errorState.username}</p>
         ) : null}
       </label>
 
@@ -106,7 +108,7 @@ function Login() {
         ) : null}
       </label>
 
-      <button type="submit" disabled={buttonDisabled}>
+      <button type="submit" disabled={buttonDisabled} onClick={() => reset()}>
         Submit
       </button>
     </form>
