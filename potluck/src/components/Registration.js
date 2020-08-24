@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import axios from "axios";
@@ -161,6 +162,14 @@ function Registration() {
         Submit
       </button>
     </form>
+=======
+import React from "react";
+
+function Registration() {
+  return (
+    <div>
+      <h2>Hello from Registration</h2>
+    </div>
   );
 }
 
