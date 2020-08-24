@@ -46,12 +46,10 @@ const App = () => {
     // todo: Switch Version
 
     <div className="App">
-      <nav>
-        <h1>POTLUCK PLANNER</h1>
-        <div>
-          <Navigation />
-        </div>
-      </nav>
+      <div>
+        <Navigation />
+      </div>
+
       <Switch>
         <Route path="/registration">
           <Registration />

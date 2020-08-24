@@ -3,18 +3,20 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const NavContainer = styled.div`
-//! I Need to make this more user-friendly
-  width: 100%;
-  height: 45px;
+  //! I need to make this more user-friendly
+  width: 90%;
   font-size: 1rem;
+  margin: auto;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: #070707;
   border: 2px solid black;
+
   h1 {
-    color: #EEEEEE;
-    padding: 5%
+    color: #eeeeee;
+    padding: 5%;
   }
   nav {
     a {
@@ -23,7 +25,7 @@ const NavContainer = styled.div`
       color: white;
 
       &:hover {
-        color: black;
+        color: #b1e083;
       }
     }
   }
@@ -34,11 +36,12 @@ const Navigation = (props) => {
 
   return (
     <NavContainer>
+      <h1>POTLUCK PLANNER</h1>
       <nav>
         <Link to="/">Home</Link>
+        <Link to="/Search">Search</Link>
         <Link to="/Registration">Registration</Link>
         <Link to="/Login">Login</Link>
-        <Link to="/Search">Search</Link>
       </nav>
     </NavContainer>
   );

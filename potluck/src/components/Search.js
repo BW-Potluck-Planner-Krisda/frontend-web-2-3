@@ -36,7 +36,7 @@ const Search = () => {
     const results = characters.filter((character) => {
       return character.toLowerCase().includes(searchTerm.toLowerCase());
     });
-    
+
     setSearchResults(results);
     //console.log("hello", results);
   }, [searchTerm]);
