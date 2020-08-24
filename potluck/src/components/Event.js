@@ -1,11 +1,8 @@
 import React from "react";
 
-const Event = () => {
-  return (
-    <div>
-      <h5>Hello from Event!</h5>
-    </div>
-  );
-};
+
+function Event() {
+  return <h1>Hello from event</h1>;
+}
 
 export default Event;

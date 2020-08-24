@@ -12,6 +12,7 @@ import Home from "./components/Home";
 import Navigation from "./components/Navigation";
 import Event from "./components/Event";
 import Search from "./components/Search";
+import Display from "./components/Display";
 
 const App = () => {
   //? Regular Route Version
