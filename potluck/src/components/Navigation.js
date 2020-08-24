@@ -3,16 +3,18 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const NavContainer = styled.div`
+//! I Need to make this more user-friendly
   width: 100%;
-  height: 100px;
-  font-size: 2.1rem;
+  height: 45px;
+  font-size: 1rem;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 30px;
-  background-color: darkRed;
+  background-color: #070707;
   border: 2px solid black;
   h1 {
-    color: white;
+    color: #EEEEEE;
+    padding: 5%
   }
   nav {
     a {
@@ -32,9 +34,6 @@ const Navigation = (props) => {
 
   return (
     <NavContainer>
-      <div>
-        <h1>Navigation</h1>
-      </div>
       <nav>
         <Link to="/">Home</Link>
         <Link to="/Registration">Registration</Link>

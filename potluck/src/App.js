@@ -1,44 +1,77 @@
 import React, { useState } from "react";
 // import { BrowserRouter as Router } from "react-router-dom";
-import { Route } from "react-router-dom";
+import { Route, Link, Switch } from "react-router-dom";
 
 //import styled from "styled-components";
 import "./App.css";
 
 // Components
-import Login from "./component/Login";
-import Registration from "./component/Registration";
-import Home from "./component/Home";
-import Navigation from "./component/Navigation";
-import Event from "./component/Event";
-import Search from "./component/Search";
+import Login from "./components/Login";
+import Registration from "./components/Registration";
+import Home from "./components/Home";
+import Navigation from "./components/Navigation";
+import Event from "./components/Event";
+import Search from "./components/Search";
 
 const App = () => {
-  const [data, SetData] = useState([]);
+  //? Regular Route Version
+  //   return (
+  //     <div className="App">
+  //       <Navigation />
+
+  //       <Route path="/registration">
+  //         <Registration />
+  //       </Route>
+
+  //       <Route path="/Login">
+  //         <Login />
+  //       </Route>
+
+  //       <Route path="/Event">
+  //         <Event />
+  //       </Route>
+
+  //       <Route path="/Search">
+  //         <Search />
+  //       </Route>
+
+  //       <Route exact path="/">
+  //         <Home />
+  //       </Route>
+  //     </div>
+  //   );
+  // };
 
   return (
+    // todo: Switch Version
+
     <div className="App">
-      <Navigation />
+      <nav>
+        <h1>POTLUCK PLANNER</h1>
+        <div>
+          <Navigation />
+        </div>
+      </nav>
+      <Switch>
+        <Route path="/registration">
+          <Registration />
+        </Route>
+        <Route path="/Login">
+          <Login />
+        </Route>
 
-      <Route path="/registration">
-        <Registration />
-      </Route>
+        <Route path="/Event">
+          <Event />
+        </Route>
 
-      <Route path="/Login">
-        <Login />
-      </Route>
+        <Route path="/Search">
+          <Search />
+        </Route>
 
-      <Route path="/Event">
-        <Event />
-      </Route>
-
-      <Route path="/Search">
-        <Search />
-      </Route>
-
-      <Route exact path="/">
-        <Home />
-      </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
     </div>
   );
 };
