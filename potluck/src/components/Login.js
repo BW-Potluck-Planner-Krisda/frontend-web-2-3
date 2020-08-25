@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as yup from "yup";
@@ -113,16 +112,7 @@ function Login() {
         Submit
       </button>
     </form>
-=======
-import React from "react";
-
-
-function Login() {
-  return (
-    <div>
-      <h3>Hello World! Login</h3>
-    </div>
-  );
+  )
 }
 
-export default Login;
+
