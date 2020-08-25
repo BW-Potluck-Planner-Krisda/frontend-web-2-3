@@ -1,10 +1,6 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as yup from "yup";
-import { useForm } from "react-hook-form";
-
-// first route from app "/"
 
 const Schema = yup.object().shape({
   username: yup
@@ -15,10 +11,6 @@ const Schema = yup.object().shape({
 });
 
 function Login() {
-  // hook form
-
-  const { reset } = useForm({});
-
   //setting up state
 
   const [buttonDisabled, setButtonDisabled] = useState("");
@@ -35,6 +27,7 @@ function Login() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setFormState({ username: "", password: "", remember: false });
     console.log("form submitted!");
     axios
       .post("https://reqres.in/api/users", formState)
@@ -64,11 +57,12 @@ function Login() {
   const onChange = (e) => {
     e.persist();
     console.log("input changed", e.target.value);
+
     const newFormData = {
       ...formState,
-      [e.target.name]:
-        e.target.type === "checkbox" ? e.target.checked : e.target.value,
+      [e.target.name]: e.target.value,
     };
+
     validate(e);
     setFormState(newFormData);
   };
@@ -109,19 +103,10 @@ function Login() {
         ) : null}
       </label>
 
-      <button type="submit" disabled={buttonDisabled} onClick={() => reset()}>
+      <button type="submit" disabled={buttonDisabled}>
         Submit
       </button>
     </form>
-=======
-import React from "react";
-
-
-function Login() {
-  return (
-    <div>
-      <h3>Hello World! Login</h3>
-    </div>
   );
 }
 
