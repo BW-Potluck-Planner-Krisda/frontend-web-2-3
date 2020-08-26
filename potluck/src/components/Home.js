@@ -1,32 +1,36 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import Search from './Search';
-import dummyData from './dummyData';
+// import dummyData from './dummyData';
+import {connect} from 'react-redux';
+import {fetchingEvents} from './actions/actionsIndex';
 
 
-function Home() {
+function Home(props) {
   return (
     <>
-      <h1>Welcome *username*</h1>
+      <h1>Welcome {props.data.username}</h1>
       <div className='home'>
         <div className='saved'>
           <h2>Saved Events</h2>
-          {dummyData.map(saved => {
+          {props.data === [] ? (<p>No Saved Events</p>) : (
+          props.data.map(saved => {
             return (
               <ul>
                 <li key={saved.id} title={saved.title} date={saved.date}></li>
               </ul>)
-          })}
+          })
+          )}
 
         </div>
         <div className='search'>
 
           <h2>Search Events</h2>
           <Search />
-          {dummyData.map(saved => {
+          {props.data.map(search => {
             return (
               <ul>
-                <li key={saved.id} title={saved.title} date={saved.date}></li>
+                <li key={search.id} title={search.title} date={search.date}></li>
               </ul>)
           })}
         </div>
@@ -34,6 +38,19 @@ function Home() {
 
     </>
   )
+};
+
+const mapStateToProps = state =>{
+  return {
+    data: state.data,
+    isFetching: state.isFetching,
+    error: state.error
+  }
 }
 
-export default Home;
+export default connect(
+  mapStateToProps,
+  {
+    fetchingEvents
+  }
+)(Home);
