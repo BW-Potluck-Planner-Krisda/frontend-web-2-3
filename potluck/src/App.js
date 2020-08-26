@@ -13,7 +13,7 @@ import Navigation from "./components/Navigation";
 import Event from "./components/Event";
 import Search from "./components/Search";
 import Display from "./components/Display";
-// import Route from './components/utils/Route';
+import PrivateRoute from './components/utils/PrivateRoute';
 import AddEvent from './components/AddEvent';
 
 const App = () => {
@@ -34,21 +34,21 @@ const App = () => {
           <Login />
         </Route>
 
-        <Route path="/Event">
+        <PrivateRoute path="/Event">
           <Event />
-        </Route>
+        </PrivateRoute>
 
-        <Route path="/Search">
+        <PrivateRoute path="/Search">
           <Search />
-        </Route>
+        </PrivateRoute>
 
-        <Route path='/addevent'>
+        <PrivateRoute path='/addevent'>
           <AddEvent />
-        </Route>
+        </PrivateRoute>
 
-        <Route exact path="/">
+        <PrivateRoute exact path="/">
           <Home />
-        </Route>
+        </PrivateRoute>
       </Switch>
     </div>
   );

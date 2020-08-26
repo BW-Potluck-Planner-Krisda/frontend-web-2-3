@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as yup from "yup";
+import {connect} from 'react-redux';
+import {postingLogin}from './actions/actionsIndex';
+import {useHistory} from 'react-router-dom';
 
 const Schema = yup.object().shape({
   username: yup
@@ -25,14 +28,19 @@ function Login() {
     password: "",
   });
 
+  const history = useHistory();
+
   const onSubmit = (e) => {
     e.preventDefault();
     setFormState({ username: "", password: "", remember: false });
     console.log("form submitted!");
-    axios
-      .post("https://reqres.in/api/users", formState)
-      .then((res) => console.log("Success!!!", res.data))
-      .catch((err) => console.log("Failed", err));
+    postingLogin();
+    history.push('/')
+
+    // axios
+    //   .post("https://reqres.in/api/users", formState)
+    //   .then((res) => console.log("Success!!!", res.data))
+    //   .catch((err) => console.log("Failed", err));
   };
 
   const validate = (e) => {
@@ -109,4 +117,17 @@ function Login() {
     </form>
   );
 }
-export default Login;
+
+const mapStateToProps = state =>{
+  return {
+    data: state.data,
+    isPosting: state.isPosting,
+    error: state.error
+  }
+}
+export default connect(
+  mapStateToProps,
+  {
+    postingLogin
+  }
+)(Login);
