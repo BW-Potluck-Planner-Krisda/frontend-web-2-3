@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { axiosWithAuth } from './utils/axiosWithAuth';
+import { useHistory } from 'react-router-dom';
 // need an api to sends data and fetch from
 
 //second route from App "/Registration"
@@ -45,6 +47,7 @@ function Registration() {
   });
 
   //   onSubmit function
+  const history = useHistory();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -56,9 +59,12 @@ function Registration() {
       password: "",
     });
     console.log("form submitted!");
-    axios
+    axiosWithAuth()
       .post("https://reqres.in/api/users", formState)
-      .then((res) => console.log("success!!!", res.data))
+      .then((res) => {
+        console.log("success!!!", res.data);
+        history.push('/Login')
+      })
       .catch((err) => console.log("Failed", err));
   };
 

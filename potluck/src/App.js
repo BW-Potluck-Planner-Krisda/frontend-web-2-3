@@ -13,35 +13,10 @@ import Navigation from "./components/Navigation";
 import Event from "./components/Event";
 import Search from "./components/Search";
 import Display from "./components/Display";
+// import Route from './components/utils/Route';
+import AddEvent from './components/AddEvent';
 
 const App = () => {
-  //? Regular Route Version
-  //   return (
-  //     <div className="App">
-  //       <Navigation />
-
-  //       <Route path="/registration">
-  //         <Registration />
-  //       </Route>
-
-  //       <Route path="/Login">
-  //         <Login />
-  //       </Route>
-
-  //       <Route path="/Event">
-  //         <Event />
-  //       </Route>
-
-  //       <Route path="/Search">
-  //         <Search />
-  //       </Route>
-
-  //       <Route exact path="/">
-  //         <Home />
-  //       </Route>
-  //     </div>
-  //   );
-  // };
 
   return (
     // todo: Switch Version
@@ -67,7 +42,11 @@ const App = () => {
           <Search />
         </Route>
 
-        <Route path="/">
+        <Route path='/addevent'>
+          <AddEvent />
+        </Route>
+
+        <Route exact path="/">
           <Home />
         </Route>
       </Switch>

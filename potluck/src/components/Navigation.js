@@ -40,6 +40,7 @@ const Navigation = (props) => {
       <nav>
         <Link to="/">Home</Link>
         <Link to="/Search">Search</Link>
+        <Link to='/addevent'>Add Event</Link>
         <Link to="/Registration">Registration</Link>
         <Link to="/Login">Login</Link>
       </nav>
