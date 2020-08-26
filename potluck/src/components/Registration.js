@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import axios from "axios";
@@ -49,6 +48,13 @@ function Registration() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setFormState({
+      name: "",
+      value: "",
+      email: "",
+      username: "",
+      password: "",
+    });
     console.log("form submitted!");
     axios
       .post("https://reqres.in/api/users", formState)
@@ -162,7 +168,7 @@ function Registration() {
         Submit
       </button>
     </form>
-  )
+  );
 }
 
 export default Registration;
