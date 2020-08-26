@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import styled from "styled-components";
 
 const NavContainer = styled.div`
@@ -39,10 +39,10 @@ const Navigation = (props) => {
       <h1>POTLUCK PLANNER</h1>
       <nav>
         <Link to="/">Home</Link>
-        <Link to="/Search">Search</Link>
+
         <Link to='/addevent'>Add Event</Link>
-        <Link to="/Registration">Registration</Link>
         <Link to="/Login">Login</Link>
+        <a href="https://bw-potluck-planner-krisda.github.io/marketing-web-1/">Landing Page</a>
       </nav>
     </NavContainer>
   );
