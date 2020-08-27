@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as yup from "yup";
-import {connect} from 'react-redux';
-import {postingLogin}from './actions/actionsIndex';
-import {useHistory} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { postingLogin } from './actions/actionsIndex';
+import { useHistory } from 'react-router-dom';
 
 const Schema = yup.object().shape({
   username: yup
@@ -118,7 +118,7 @@ function Login() {
   );
 }
 
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
   return {
     data: state.data,
     isPosting: state.isPosting,
