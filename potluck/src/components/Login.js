@@ -3,7 +3,7 @@ import axios from "axios";
 import * as yup from "yup";
 import { connect } from 'react-redux';
 import { postingLogin } from './actions/actionsIndex';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 
 const Schema = yup.object().shape({
   username: yup
@@ -28,14 +28,14 @@ function Login() {
     password: "",
   });
 
-  const history = useHistory();
+  // const history = useHistory();
 
   const onSubmit = (e) => {
     e.preventDefault();
     setFormState({ username: "", password: "", remember: false });
     console.log("form submitted!");
     postingLogin();
-    history.push('/')
+    // history.push('/')
 
     // axios
     //   .post("https://reqres.in/api/users", formState)
