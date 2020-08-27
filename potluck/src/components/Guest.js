@@ -1,38 +1,46 @@
+//dependencies
+
 import React, { useState, useEffect } from "react";
-import * as yup from "yup";
 import axios from "axios";
+import * as yup from "yup";
+
+// setting up schema validation
 
 const Schema = yup.object().shape({
-  name: yup.string().required("Name is a required field"),
-  email: yup
-    .string()
-    .email("Please enter a valid email")
-    .required("please enter a valid email."),
   username: yup
     .string()
     .required("Username is required and must be over three characters long")
     .min(3),
-  password: yup.string().required("Please enter your password").min(6),
+  attending: yup.string().oneOf(["Yes", "No", "maybe"]),
+
+  bringing: yup.string().required("What items will you bring>").min(3),
 });
 
-function Registration() {
+function Guest() {
   //setting up state
 
   const [buttonDisabled, setButtonDisabled] = useState("");
 
   const [formState, setFormState] = useState({
     username: "",
-    password: "",
+    attending: "",
+    bringing: "",
   });
 
   const [errorState, setErrorState] = useState({
     username: "",
-    password: "",
+    attending: "",
+    bringing: "",
   });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setFormState({ username: "", password: "", remember: false });
+    setFormState({
+      username: "",
+      attending: "",
+      bringing: "",
+    });
+
     console.log("form submitted!");
     axios
       .post("https://reqres.in/api/users", formState)
@@ -79,37 +87,7 @@ function Registration() {
   }, [formState]);
 
   return (
-    // setting up form
-
     <form onSubmit={onSubmit}>
-      <label htmlFor="name">
-        Name
-        <input
-          type="text"
-          name="name"
-          value={formState.name}
-          placeholder="Please enter your name"
-          onChange={onChange}
-        />
-        {errorState.name.length > 0 ? (
-          <p className="error">{errorState.name}</p>
-        ) : null}
-      </label>
-
-      <label htmlFor="email">
-        Email
-        <input
-          type="email"
-          name="email"
-          value={formState.email}
-          placeholder="Please enter email"
-          onChange={onChange}
-        />
-        {errorState.email.length > 0 ? (
-          <p className="error">{errorState.email}</p>
-        ) : null}
-      </label>
-
       <label htmlFor="username">
         Username
         <input
@@ -123,24 +101,36 @@ function Registration() {
           <p className="error">{errorState.username}</p>
         ) : null}
       </label>
+      <br></br>
 
-      <label htmlFor="password">
-        Password
-        <input
-          type="password"
-          name="password"
-          value={formState.password}
-          placeholder="Please enter password"
-          onChange={onChange}
-        />
-        {errorState.password.length > 0 ? (
-          <p className="error">{errorState.password}</p>
-        ) : null}
+      <label htmlFor="attending">
+        Will you be attending?
+        <select name="attending" onChange={onChange} id="attending">
+          <option>Yes</option>
+          <option>No</option>
+          <option>Maybe</option>
+        </select>
       </label>
 
-      <button type="submit">Submit</button>
+      <br></br>
+
+      <label htmlFor="bringing">
+        What whill you bring??
+        <input
+          type="text"
+          name="bringing"
+          value={formState.bringing}
+          placeholder="What will you bring"
+          onChange={onChange}
+        />
+      </label>
+
+      <br></br>
+      <button disabled={buttonDisabled} type="submit">
+        Submit
+      </button>
     </form>
   );
 }
 
-export default Registration;
+export default Guest;
