@@ -26,8 +26,7 @@ export const POSTING_LOGIN_ERROR = 'POSTING_LOGIN_ERROR';
 
 export const postingLogin = (credentials, history) => (dispatch) => {
     dispatch({ type: POSTING_LOGIN_START })
-    axios
-        .post('https://reqres.in/api/users', credentials)
+    axios.post('https://reqres.in/api/users', credentials)
         .then(res => {
             console.log('from postingLogin:start', res)
             dispatch({ type: POSTING_LOGIN_SUCCESS, payload: res.data })
@@ -47,11 +46,11 @@ export const POSTING_REGISTRATION_ERROR = 'POSTING_REGISTRATION_ERROR';
 
 export const postingRegistration = (credentials, history) => (dispatch) => {
     dispatch({ type: POSTING_REGISTRATION_START })
-    axios
-        .post('https://reqres.in/api/register', credentials)
+    axios.post('https://reqres.in/api/register', credentials)
         .then(res => {
             console.log('from postingRegistration:start', res)
             dispatch({ type: POSTING_REGISTRATION_SUCCESS, payload: res.data })
+            localStorage.setItem('token', res.data.token)
             history.push('/Login')
         })
         .catch(err => {
