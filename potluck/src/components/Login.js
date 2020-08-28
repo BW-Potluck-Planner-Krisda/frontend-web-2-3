@@ -34,7 +34,11 @@ function Login() {
     e.preventDefault();
     setFormState({ username: "", password: "", remember: false });
     console.log("form submitted!");
-    postingLogin();
+    const credentials = {
+      username: formState.username,
+      password: formState.password
+    }
+    postingLogin(credentials);
     // history.push('/')
 
     // axios

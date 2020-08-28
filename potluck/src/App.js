@@ -24,6 +24,7 @@ const App = () => {
     <div className="App">
       <div>
         <Navigation />
+        
       </div>
 
       <Switch>
