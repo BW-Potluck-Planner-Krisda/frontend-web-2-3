@@ -29,10 +29,10 @@ export const postingLogin = (credentials) => (dispatch) => {
     axios.post('https://reqres.in/api/login', credentials)
         .then(res => {
             if (res.status) {
-                return localStorage.setItem('token', JSON.stringify(res.data.token))
+                return localStorage.setItem('token', JSON.stringify(res.data.token));
                 window.location.href = '/home'
             } else {
-                return window.location.href = '/home'
+                return window.location.href = '/Login'
             }
             console.log('from postingLogin:start', res)
             dispatch({ type: POSTING_LOGIN_SUCCESS, payload: res.data })
@@ -53,15 +53,9 @@ export const postingRegistration = (credentials) => (dispatch) => {
     dispatch({ type: POSTING_REGISTRATION_START })
     axios.post('https://reqres.in/api/register', credentials)
         .then(res => {
-            if (res.status) {
-                return localStorage.setItem('token', JSON.stringify(res.data.token))
-                window.location.href = '/Login'
-            } else {
-                return window.location.href = '/'
-            }
             console.log('from postingRegistration:start', res)
             dispatch({ type: POSTING_REGISTRATION_SUCCESS, payload: res.data })
-            localStorage.setItem('token', res.data.token)
+            window.location.href = '/Login'
         })
         .catch(err => {
             console.error('from postingRegistration:error', err)

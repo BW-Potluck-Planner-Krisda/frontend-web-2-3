@@ -61,12 +61,10 @@ function Registration(props) {
     });
     console.log("form submitted!");
     const credentials = {
-      name: formState.name,
       email: formState.email,
-      username: formState.username,
       password: formState.password
     }
-    postingRegistration(credentials);
+    props.postingRegistration(credentials);
     // axios
     //   .post("https://reqres.in/api/users", formState)
     //   .then((res) => {
