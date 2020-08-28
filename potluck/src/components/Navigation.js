@@ -3,9 +3,6 @@ import { Link, } from "react-router-dom";
 import styled from "styled-components";
 import potluckLogo from '../potluckLogo.png';
 
-const image = styled.img`
-width: 50%;
-`
 
 const NavContainer = styled.div`
   //! I need to make this more user-friendly
@@ -49,7 +46,7 @@ const Navigation = (props) => {
       <img src={potluckLogo} alt='colorful background with silver stock pot with four leaf clover sticking out' />
       <h1>POTLUCK PLANNER</h1>
       <nav>
-        <Link to="/">Home</Link>
+        <Link to="/home">Home</Link>
 
         <Link to='/addevent'>Add Event</Link>
         <Link to="/Login">Login</Link>

@@ -9,7 +9,7 @@ export const FETCHING_EVENTS_ERROR = 'FETCHING_EVENT_ERROR';
 export const fetchingEvents = () => (dispatch) => {
     dispatch({ type: FETCHING_EVENTS_START })
     axiosWithAuth()
-        .get('https://reqres.in/api/unknown')
+        .get('unknown')
         .then(res => {
             console.log('from fetchingEvents:start', res)
             dispatch({ type: FETCHING_EVENTS_SUCCESS, payload: res.data })
@@ -24,14 +24,19 @@ export const POSTING_LOGIN_START = 'POSTING_LOGIN_START';
 export const POSTING_LOGIN_SUCCESS = 'POSTING_LOGIN_SUCCESS';
 export const POSTING_LOGIN_ERROR = 'POSTING_LOGIN_ERROR';
 
-export const postingLogin = (credentials, history) => (dispatch) => {
+export const postingLogin = (credentials) => (dispatch) => {
     dispatch({ type: POSTING_LOGIN_START })
-    axios.post('https://reqres.in/api/users', credentials)
+    axios.post('https://reqres.in/api/login', credentials)
         .then(res => {
+            if (res.status) {
+                return localStorage.setItem('token', JSON.stringify(res.data.token))
+                window.location.href = '/home'
+            } else {
+                return window.location.href = '/home'
+            }
             console.log('from postingLogin:start', res)
             dispatch({ type: POSTING_LOGIN_SUCCESS, payload: res.data })
-            localStorage.setItem('token', res.data.token)
-            history.push('/')
+
         })
         .catch(err => {
             console.error('from postingLogin:error', err)
@@ -44,14 +49,19 @@ export const POSTING_REGISTRATION_SUCCESS = 'POSTING_REGISTRATION_SUCCESS';
 export const POSTING_REGISTRATION_ERROR = 'POSTING_REGISTRATION_ERROR';
 
 
-export const postingRegistration = (credentials, history) => (dispatch) => {
+export const postingRegistration = (credentials) => (dispatch) => {
     dispatch({ type: POSTING_REGISTRATION_START })
     axios.post('https://reqres.in/api/register', credentials)
         .then(res => {
+            if (res.status) {
+                return localStorage.setItem('token', JSON.stringify(res.data.token))
+                window.location.href = '/Login'
+            } else {
+                return window.location.href = '/'
+            }
             console.log('from postingRegistration:start', res)
             dispatch({ type: POSTING_REGISTRATION_SUCCESS, payload: res.data })
             localStorage.setItem('token', res.data.token)
-            history.push('/Login')
         })
         .catch(err => {
             console.error('from postingRegistration:error', err)
