@@ -48,5 +48,43 @@
   margin-top:2%;
 }
 
+.eventHeader{
+  display:flex;
+  margin:2%
+}
+
+.select{
+  width: 35%;
+  margin: 0 auto;
+}
+
+.bevForm {
+  width:30%;
+}
+
+.foodForm {
+  width:30%;
+}
+
+.desForm {
+  width: 30%;
+}
+
+.bring {
+  width:90%;
+  margin: 0 auto;
+  display:flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border: 2px ridge #833b01;
+}
+
+.bringHeader {
+  width: 90%;
+  margin: 0 auto;
+  background-color: #f35a01;
+  border: 2px ridge #833b01;
+}
+
 
 

@@ -28,16 +28,16 @@ const App = () => {
       </div>
 
       <Switch>
-      <Route exact path="/Login">
+        <Route exact path="/Login">
           <Login />
         </Route>
         <Route exact path="/">
           <Registration />
         </Route>
-        
 
-        <PrivateRoute exact path="/Event">
-          <Event />
+
+        <PrivateRoute exact path="/singleEvent">
+          <Display />
         </PrivateRoute>
 
         <PrivateRoute exact path="/Search">
