@@ -1,6 +1,5 @@
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 
 export const FETCHING_EVENTS_START = 'FETCHING_EVENT_START';
 export const FETCHING_EVENTS_SUCCESS = 'FETCHING_EVENT_SUCCESS';
@@ -29,10 +28,10 @@ export const postingLogin = (credentials) => (dispatch) => {
     axios.post('https://reqres.in/api/login', credentials)
         .then(res => {
             if (res.status) {
-                return localStorage.setItem('token', JSON.stringify(res.data.token));
+                 localStorage.setItem('token', JSON.stringify(res.data.token))
                 window.location.href = '/home'
             } else {
-                return window.location.href = '/Login'
+                 window.location.href = '/Login'
             }
             console.log('from postingLogin:start', res)
             dispatch({ type: POSTING_LOGIN_SUCCESS, payload: res.data })
