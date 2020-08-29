@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import * as yup from "yup";
 import { connect } from 'react-redux';
 import { postingLogin } from './actions/actionsIndex';
@@ -82,39 +81,42 @@ function Login(props) {
   }, [formState]);
 
   return (
-    <form onSubmit={onSubmit}>
-      <label htmlFor="username">
-        Username
+    <>
+      <h1 className='heading'>Log In</h1>
+      <form onSubmit={onSubmit}>
+        <label htmlFor="username">
+          Username
         <input
-          type="text"
-          name="username"
-          value={formState.username}
-          placeholder="Please enter username"
-          onChange={onChange}
-        />
-        {errorState.username.length > 0 ? (
-          <p className="error">{errorState.username}</p>
-        ) : null}
-      </label>
+            type="text"
+            name="username"
+            value={formState.username}
+            placeholder="Please enter username"
+            onChange={onChange}
+          />
+          {errorState.username.length > 0 ? (
+            <p className="error">{errorState.username}</p>
+          ) : null}
+        </label>
 
-      <label htmlFor="password">
-        Password
+        <label htmlFor="password">
+          Password
         <input
-          type="password"
-          name="password"
-          value={formState.password}
-          placeholder="Please enter password"
-          onChange={onChange}
-        />
-        {errorState.password.length > 0 ? (
-          <p classname="error">{errorState.password}</p>
-        ) : null}
-      </label>
+            type="password"
+            name="password"
+            value={formState.password}
+            placeholder="Please enter password"
+            onChange={onChange}
+          />
+          {errorState.password.length > 0 ? (
+            <p classname="error">{errorState.password}</p>
+          ) : null}
+        </label>
 
-      <button type="submit" disabled={buttonDisabled}>
-        Submit
+        <button className='btn' type="submit" disabled={buttonDisabled}>
+          Submit
       </button>
-    </form>
+      </form>
+    </>
   );
 }
 

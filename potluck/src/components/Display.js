@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import {connect} from 'react-redux';
+import {deletingEvent} from './actions/actionsIndex';
 
 function Display(props) {
   const [formHeader, SetFormHeader] = useState({
@@ -103,6 +105,7 @@ function Display(props) {
 
   const handleDelete = e => {
     e.preventDefault();
+    props.deletingEvent();
   };
 
   return (
@@ -344,4 +347,8 @@ function Display(props) {
   )
 }
 
-export default Display;
+export default connect(
+  null,
+{
+  deletingEvent
+}) (Display);

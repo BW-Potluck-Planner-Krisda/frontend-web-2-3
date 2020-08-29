@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
-import axios from "axios";
 import { useForm } from "react-hook-form";
-// import { axiosWithAuth } from './utils/axiosWithAuth';
-import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { postingRegistration } from './actions/actionsIndex';
-// need an api to sends data and fetch from
-
-//second route from App "/Registration"
 
 const Schema = yup.object().shape({
   name: yup.string().required("Name is a required field"),
@@ -116,10 +110,10 @@ function Registration(props) {
   }, [formState]);
 
   return (
-    // setting up form
-
-    <form onSubmit={onSubmit}>
-      <label htmlFor="name">
+    <>
+    <h1 className='heading'>Registeration</h1>
+    <form  className ='regForm' onSubmit={onSubmit}>
+      <label className='reglabel' htmlFor="name">
         Name
         <input
           type="text"
@@ -133,7 +127,7 @@ function Registration(props) {
         ) : null}
       </label>
 
-      <label htmlFor="email">
+      <label className='reglabel' htmlFor="email">
         Email
         <input
           type="email"
@@ -147,7 +141,7 @@ function Registration(props) {
         ) : null}
       </label>
 
-      <label htmlFor="username">
+      <label className='reglabel' htmlFor="username">
         Username
         <input
           type="text"
@@ -161,7 +155,7 @@ function Registration(props) {
         ) : null}
       </label>
 
-      <label htmlFor="password">
+      <label className='reglabel' htmlFor="password">
         Password
         <input
           type="password"
@@ -175,10 +169,11 @@ function Registration(props) {
         ) : null}
       </label>
 
-      <button type="submit" onClick={() => reset()}>
+      <button className='btn' type="submit" onClick={() => reset()}>
         Submit
       </button>
     </form>
+    </>
   );
 }
 

@@ -70,7 +70,10 @@ const AddEvent = (props) => {
     // }
 
     return (
+        <>
+        <h1 className='heading'>Add or Edit an Event</h1>
         <div className='addform'>
+            
             <form className='form'>
                 <label className='label' for='name'> Name</label>
                 <input
@@ -139,6 +142,7 @@ const AddEvent = (props) => {
                 <button className='btn' onClick={handleEdit}>Edit Event</button>
             </form>
         </div>
+        </>
     )
 
 

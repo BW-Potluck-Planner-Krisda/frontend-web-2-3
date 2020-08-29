@@ -1,29 +1,8 @@
-import React, { useState, useEffect } from "react";
-import {connect} from 'react-redux';
-import {fetchingEvents} from './actions/actionsIndex';
+import React, { useState } from "react";
+import { connect } from 'react-redux';
+import { fetchingEvents } from './actions/actionsIndex';
 
-//todo: Harry Potter test run
-// const characters = [
-//   "Harry Potter",
-//   "Luna Lovegood",
-//   "Neville Longbottom",
-//   "Hermione Granger",
-//   "Ron Weasley",
-//   "Ginny Weasley",
-//   "Fred Weasley",
-//   "George Weasley",
-//   "Albus Dumbledore ",
-//   "Aberforth Dumbledore ",
-//   "Dudley Dursley ",
-//   "Petunia Dursley ",
-//   "Vernon Dursley",
-//   "Cornelius Fudge",
-//   "Rubeus Hagrid ",
-//   "Viktor Krum ",
-//   "Bellatrix Lestrange",
-//   "Narcissa Malfoy",
-//   "Draco Malfoy",
-// ];
+
 
 const Search = (props) => {
   /* Todo:STEP 1: Create searchTerm and searchResults state
@@ -32,16 +11,7 @@ const Search = (props) => {
   */
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
 
-  // useEffect(() => {
-  //   const results = characters.filter((character) => {
-  //     return character.toLowerCase().includes(searchTerm.toLowerCase());
-  //   });
-
-  //   setSearchResults(results);
-  //   //console.log("hello", results);
-  // }, [searchTerm]);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -64,7 +34,7 @@ const Search = (props) => {
           value={searchTerm}
           onChange={handleChange}
         />
-        <button onClick={handleSubmit}>search</button>
+        <button className='btn' onClick={handleSubmit}>search</button>
       </form>
 
       <div>
@@ -78,7 +48,7 @@ const Search = (props) => {
   );
 };
 
-const mapStateToProps = state =>{
+const mapStateToProps = state => {
   return {
     data: state.data,
     isFetching: state.isFetching,
@@ -92,4 +62,4 @@ export default connect(
     fetchingEvents
   }
 )
-(Search);
+  (Search);
