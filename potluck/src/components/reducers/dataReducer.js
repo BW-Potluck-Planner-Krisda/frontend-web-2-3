@@ -1,6 +1,6 @@
 import {
     FETCHING_EVENTS_START, FETCHING_EVENTS_SUCCESS, FETCHING_EVENTS_ERROR,
-    POSTING_LOGIN_START, POSTING_LOGIN_SUCCESS, POSTING_LOGIN_ERROR, POSTING_REGISTRATION_START, POSTING_REGISTRATION_SUCCESS, POSTING_REGISTRATION_ERROR, POSTING_ADDEVENT_START, POSTING_ADDEVENT_SUCCESS, POSTING_ADDEVENT_ERROR
+    POSTING_LOGIN_START, POSTING_LOGIN_SUCCESS, POSTING_LOGIN_ERROR, POSTING_REGISTRATION_START, POSTING_REGISTRATION_SUCCESS, POSTING_REGISTRATION_ERROR, POSTING_ADDEVENT_START, POSTING_ADDEVENT_SUCCESS, POSTING_ADDEVENT_ERROR, PUTTING_EDITEVENT_START, PUTTING_EDITEVENT_SUCCESS, PUTTING_EDITEVENT_ERROR
 } from '../actions/actionsIndex';
 
 export const initialState = {
@@ -36,7 +36,7 @@ export const dataReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isPosting: true,
-                data: {...state.data}
+                data: { ...state.data }
             }
         case POSTING_LOGIN_SUCCESS:
             return {
@@ -55,7 +55,7 @@ export const dataReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isPosting: true,
-                data: {...state.data}
+                data: { ...state.data }
             }
         case POSTING_REGISTRATION_SUCCESS:
             return {
@@ -74,7 +74,7 @@ export const dataReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isPosting: true,
-                data: {...state.data}
+                data: { ...state.data }
             }
         case POSTING_ADDEVENT_SUCCESS:
             return {
@@ -87,6 +87,25 @@ export const dataReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isPosting: false,
+                error: action.payload
+            }
+        case PUTTING_EDITEVENT_START:
+            return {
+                ...state,
+                isPutting: true,
+                data: { ...state.data }
+            }
+        case PUTTING_EDITEVENT_SUCCESS:
+            return {
+                ...state,
+                isPutting: false,
+                data: action.payload,
+                error: ''
+            }
+        case PUTTING_EDITEVENT_ERROR:
+            return {
+                ...state,
+                isPutting: false,
                 error: action.payload
             }
         default:

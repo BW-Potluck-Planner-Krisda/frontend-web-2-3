@@ -28,10 +28,10 @@ export const postingLogin = (credentials) => (dispatch) => {
     axios.post('https://reqres.in/api/login', credentials)
         .then(res => {
             if (res.status) {
-                 localStorage.setItem('token', JSON.stringify(res.data.token))
+                localStorage.setItem('token', JSON.stringify(res.data.token))
                 window.location.href = '/home'
             } else {
-                 window.location.href = '/Login'
+                window.location.href = '/Login'
             }
             console.log('from postingLogin:start', res)
             dispatch({ type: POSTING_LOGIN_SUCCESS, payload: res.data })
@@ -67,16 +67,35 @@ export const POSTING_ADDEVENT_SUCCESS = 'POSTING_ADDEVENT_SUCCESS';
 export const POSTING_ADDEVENT_ERROR = 'POSTING_ADDEVENT_ERROR';
 
 export const postingAddEvent = (additions) => (dispatch) => {
-    dispatch({type: POSTING_ADDEVENT_START})
+    dispatch({ type: POSTING_ADDEVENT_START })
     axiosWithAuth()
-    .post('https://reqres.in/api/users', additions)
-    .then(res => {
-        console.log('from postingAddEvent: start', res)
-        dispatch({type: POSTING_ADDEVENT_SUCCESS, payload: res.data})
-        window.location.href='/singleEvent'
-    })
-    .catch(err => {
-        console.error('from postingAddEvent: error', err)
-        dispatch({type: POSTING_ADDEVENT_ERROR, payload: err})
-    })
+        .post('users', additions)
+        .then(res => {
+            console.log('from postingAddEvent: start', res)
+            dispatch({ type: POSTING_ADDEVENT_SUCCESS, payload: res.data })
+            window.location.href = '/singleEvent'
+        })
+        .catch(err => {
+            console.error('from postingAddEvent: error', err)
+            dispatch({ type: POSTING_ADDEVENT_ERROR, payload: err })
+        })
+}
+
+export const PUTTING_EDITEVENT_START = 'PUTTING_EDITEVENT_START';
+export const PUTTING_EDITEVENT_SUCCESS = 'PUTTING_EDITEVENT_SUCCESS';
+export const PUTTING_EDITEVENT_ERROR = 'PUTTING_EDITEVENT_ERROR';
+
+export const puttingEditEvent = (additions) => (dispatch) => {
+    dispatch({ type: PUTTING_EDITEVENT_START })
+    axiosWithAuth()
+        .put('users/2', additions)
+        .then(res => {
+            console.log('from puttingEditEvent: start', res)
+            dispatch({ type: PUTTING_EDITEVENT_SUCCESS, payload: res.data })
+            window.location.href = '/singleEvent'
+        })
+        .catch(err => {
+            console.error('from puttingEditEvent: error', err)
+            dispatch({ type: PUTTING_EDITEVENT_ERROR, payload: err })
+        })
 }

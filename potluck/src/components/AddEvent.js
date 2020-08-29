@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { connect } from 'react-redux';
-import { postingAddEvent } from './actions/actionsIndex';
+import { postingAddEvent, puttingEditEvent } from './actions/actionsIndex';
 
 const AddEvent = (props) => {
     const [event, setEvent] = useState({
@@ -45,6 +45,19 @@ const AddEvent = (props) => {
 
     const handleEdit = e => {
         e.preventDefault();
+        const additions = {
+            location: event.location,
+            time: event.time,
+            date: event.date,
+            occassion: event.occassion,
+            name: event.name,
+            email: event.email,
+            food: event.food,
+            beverages: event.beverages,
+            dessert: event.dessert,
+            rsvp: event.rsvp
+        };
+        props.puttingEditEvent(additions)
     }
 
     // const handleSubmit = (e) => {
@@ -142,7 +155,8 @@ const mapStateToProps = state => {
 export default connect(
     mapStateToProps,
     {
-        postingAddEvent
+        postingAddEvent,
+        puttingEditEvent
     }
 )(AddEvent);
 
