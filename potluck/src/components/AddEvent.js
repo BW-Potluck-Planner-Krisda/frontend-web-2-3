@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { postingAddEvent, puttingEditEvent } from './actions/actionsIndex';
 
 const AddEvent = (props) => {
+    console.log('from AddEvent', props)
     const [event, setEvent] = useState({
         location: '',
         time: '',
@@ -75,7 +76,7 @@ const AddEvent = (props) => {
         <div className='addform'>
             
             <form className='form'>
-                <label className='label' for='name'> Name</label>
+                <label className='label' htmlFor='name'> Name</label>
                 <input
                     className='input'
                     type='text'
@@ -83,7 +84,7 @@ const AddEvent = (props) => {
                     placeholder=' Name here'
                     value={event.name}
                     onChange={handleChanges} />
-                <label className='label' for='occassion'>Occassion</label>
+                <label className='label' htmlFor='occassion'>Occassion</label>
                 <input
                     className='input'
                     type='text'
@@ -91,7 +92,7 @@ const AddEvent = (props) => {
                     placeholder='Occassion'
                     value={event.occassion}
                     onChange={handleChanges} />
-                <label className='label' for='location'>Location</label>
+                <label className='label' htmlFor='location'>Location</label>
                 <input
                     className='input'
                     type='text'
@@ -99,7 +100,7 @@ const AddEvent = (props) => {
                     placeholder='Location'
                     value={event.location}
                     onChange={handleChanges} />
-                <label className='label' for='date'>Date</label>
+                <label className='label' htmlFor='date'>Date</label>
                 <input
                     className='input'
                     type='text'
@@ -107,7 +108,7 @@ const AddEvent = (props) => {
                     placeholder='Date'
                     value={event.date}
                     onChange={handleChanges} />
-                <label className='label' for='time'>Time</label>
+                <label className='label' htmlFor='time'>Time</label>
                 <input
                     className='input'
                     type='text'
@@ -115,21 +116,21 @@ const AddEvent = (props) => {
                     placeholder='Time'
                     value={event.time}
                     onChange={handleChanges} />
-                <label className='label' for='bring'>Guests Will Bring</label>
-                <label for="bev">Beverages
+                <label className='label' htmlFor='bring'>Guests Will Bring</label>
+                <label htmlFor="bev">Beverages
   <input type="checkbox" id="bev" name="bev" value={event.beverages} onChange={handleCheckBoxes} />
                 </label>
-                <label for="food">Food(main course & sides)
+                <label htmlFor="food">Food(main course & sides)
   <input type="checkbox" id="food" name="food" value={event.food} onChange={handleCheckBoxes} />
                 </label>
-                <label for="des">Desserts
+                <label htmlFor="des">Desserts
   <input type="checkbox" id="des" name="des" value={event.dessert} onChange={handleCheckBoxes} />
                 </label>
-                <label className='label' for="rsvp">Would you like your guests to RSVP?
+                <label className='label' htmlFor="rsvp">Would you like your guests to RSVP?
   <input type="checkbox" id="rsvp" name="rsvp" value="rsvp" onChange={handleCheckBoxes} />
                 </label>
                 {(event.rsvp === true) ?
-                    (<label className='label' for='email'>Email
+                    (<label className='label' htmlFor='email'>Email
                         <input
                             className='input'
                             type='text'

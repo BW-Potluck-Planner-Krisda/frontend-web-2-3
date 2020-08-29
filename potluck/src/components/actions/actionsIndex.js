@@ -5,10 +5,10 @@ export const FETCHING_EVENTS_START = 'FETCHING_EVENT_START';
 export const FETCHING_EVENTS_SUCCESS = 'FETCHING_EVENT_SUCCESS';
 export const FETCHING_EVENTS_ERROR = 'FETCHING_EVENT_ERROR';
 
-export const fetchingEvents = (searchTerm) => (dispatch) => {
+export const fetchingEvents = () => (dispatch) => {
     dispatch({ type: FETCHING_EVENTS_START })
     axiosWithAuth()
-        .get('unknown', searchTerm)
+        .get('unknown')
         .then(res => {
             console.log('from fetchingEvents:start', res)
             dispatch({ type: FETCHING_EVENTS_SUCCESS, payload: res.data })
@@ -52,7 +52,6 @@ export const postingRegistration = (credentials) => (dispatch) => {
     dispatch({ type: POSTING_REGISTRATION_START })
     axios.post('https://reqres.in/api/register', credentials)
         .then(res => {
-            console.log('from postingRegistration:start', res)
             dispatch({ type: POSTING_REGISTRATION_SUCCESS, payload: res.data })
             window.location.href = '/Login'
         })

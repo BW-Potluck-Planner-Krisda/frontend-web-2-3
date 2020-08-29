@@ -5,6 +5,7 @@ import { fetchingEvents } from './actions/actionsIndex';
 
 
 const Search = (props) => {
+  console.log('from Search', props)
   /* Todo:STEP 1: Create searchTerm and searchResults state
    - searchTerm will save the data from the search input on every occurance of the change event.
    - searchResults is used to set the search result.
@@ -18,14 +19,13 @@ const Search = (props) => {
   };
 
   const handleSubmit = e => {
-    e.prentDefault();
-    props.fetchingEvents(searchTerm);
+    e.preventDefault();
+    props.fetchingEvents();
   }
 
   return (
-    <div>
-      <form>
-        {/* <label htmlFor="search">Search: </label> */}
+    <>
+      <form onSubmit={handleSubmit}>
         <input
           id="search"
           type="text"
@@ -34,17 +34,16 @@ const Search = (props) => {
           value={searchTerm}
           onChange={handleChange}
         />
-        <button className='btn' onClick={handleSubmit}>search</button>
+        <button className='btn'>search</button>
       </form>
-
-      <div>
-        {/* <ul>
-          {searchResults.map((character) => (
-            <li key={character}>{character}</li>
-          ))}
-        </ul> */}
-      </div>
-    </div>
+       <ul>
+        {/* {props.data.map((result) => (
+          <li key={result.pantone_value}>{result.name}</li>
+        ))} */}
+        </ul>
+    </>
+      
+    
   );
 };
 
@@ -62,4 +61,4 @@ export default connect(
     fetchingEvents
   }
 )
-  (Search);
+(Search);
