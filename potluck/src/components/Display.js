@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { axiosWithAuth } from "./utils/axiosWithAuth";
+import { deletingEvent } from "./actions/actionsIndex";
 
 function Display(props) {
   const [formHeader, SetFormHeader] = useState({
@@ -81,6 +83,9 @@ function Display(props) {
     otherDesInput: '',
   });
 
+  const [editing, setEditing] = useState(false);
+  const [eventToEdit, setEventToEdit] = useState({})
+
   const handleInputs = e => {
     setBringBev({ [e.target.name]: e.target.value });
     setBringFood({ [e.target.name]: e.target.value });
@@ -93,16 +98,19 @@ function Display(props) {
     setBringDes({ [e.target.name]: e.target.checked })
   }
 
-  const handleSave = e => {
+  const handleEdit = item => {
     e.preventDefault();
-  }
-
-  const handleEdit = e => {
+    
+  };
+  
+  const handleSave = item => {
     e.preventDefault();
+  
   };
 
-  const handleDelete = e => {
+  const handleDelete = item => {
     e.preventDefault();
+    props.deletingEvent();
   };
 
   return (

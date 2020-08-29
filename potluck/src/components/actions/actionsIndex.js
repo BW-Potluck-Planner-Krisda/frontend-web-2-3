@@ -61,3 +61,22 @@ export const postingRegistration = (credentials) => (dispatch) => {
             dispatch({ type: POSTING_REGISTRATION_ERROR, payload: err })
         })
 }
+
+export const DELETING_EVENT_START = 'DELETING_EVENT_START';
+export const DELETING_EVENT_SUCCESS = 'DELETING_EVENT_SUCCESS';
+export const DELETING_EVENT_FAILED = 'DELETING_EVENT_FAILED';
+
+export const deletingEvent = () => (dispatch) => {
+    dispatch({ type: DELETING_EVENT_START })
+    axiosWithAuth()
+        .delete('', )
+        .then(res => {
+            console.log('from deletingEvent: start', res)
+            dispatch({ type: DELETING_EVENT_SUCCESS, payload: res.data })
+            window.location.href = '/Home'
+        })
+        .catch(err => {
+            console.log('from deletingEvent: err', err)
+            dispatch({type: DELETING_EVENT_FAILED, payload: err })
+        })
+}
