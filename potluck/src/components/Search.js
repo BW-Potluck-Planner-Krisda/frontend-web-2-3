@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import {connect} from 'react-redux';
+import {fetchingEvents} from './actions/actionsIndex';
 
 //todo: Harry Potter test run
 // const characters = [
@@ -23,14 +25,14 @@ import React, { useState, useEffect } from "react";
 //   "Draco Malfoy",
 // ];
 
-const Search = () => {
+const Search = (props) => {
   /* Todo:STEP 1: Create searchTerm and searchResults state
    - searchTerm will save the data from the search input on every occurance of the change event.
    - searchResults is used to set the search result.
   */
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState(/*characters*/);
+  const [searchResults, setSearchResults] = useState([]);
 
   // useEffect(() => {
   //   const results = characters.filter((character) => {
@@ -44,6 +46,11 @@ const Search = () => {
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
+
+  const handleSubmit = e => {
+    e.prentDefault();
+    props.fetchingEvents(searchTerm);
+  }
 
   return (
     <div>
@@ -71,4 +78,18 @@ const Search = () => {
   );
 };
 
-export default Search;
+const mapStateToProps = state =>{
+  return {
+    data: state.data,
+    isFetching: state.isFetching,
+    error: state.error
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  {
+    fetchingEvents
+  }
+)
+(Search);

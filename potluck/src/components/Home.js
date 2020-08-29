@@ -9,30 +9,15 @@ import {fetchingEvents} from './actions/actionsIndex';
 function Home(props) {
   return (
     <>
-      <h1>Welcome {props.data.username}</h1>
+      <h1>Welcome to Your Home Page</h1>
       <div className='home'>
         <div className='saved'>
           <h2>Saved Events</h2>
-          {props.data === null ? <p>No Saved Events</p> : (
-          props.data.map(saved => {
-            return (
-              <ul>
-                <li key={saved.id} title={saved.title} date={saved.date}> username={saved.username}</li>
-              </ul>)
-          })
-          )}
-
         </div>
         <div className='search'>
 
           <h2>Search Events</h2>
           <Search />
-          {props.data.map(search => {
-            return (
-              <ul>
-                <li key={search.id} title={search.title} date={search.date}></li>
-              </ul>)
-          })}
         </div>
       </div>
 
@@ -40,17 +25,4 @@ function Home(props) {
   )
 };
 
-const mapStateToProps = state =>{
-  return {
-    data: state.data,
-    isFetching: state.isFetching,
-    error: state.error
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  {
-    fetchingEvents
-  }
-)(Home);
+export default Home;

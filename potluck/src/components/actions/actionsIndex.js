@@ -5,10 +5,10 @@ export const FETCHING_EVENTS_START = 'FETCHING_EVENT_START';
 export const FETCHING_EVENTS_SUCCESS = 'FETCHING_EVENT_SUCCESS';
 export const FETCHING_EVENTS_ERROR = 'FETCHING_EVENT_ERROR';
 
-export const fetchingEvents = () => (dispatch) => {
+export const fetchingEvents = (searchTerm) => (dispatch) => {
     dispatch({ type: FETCHING_EVENTS_START })
     axiosWithAuth()
-        .get('unknown')
+        .get('unknown', searchTerm)
         .then(res => {
             console.log('from fetchingEvents:start', res)
             dispatch({ type: FETCHING_EVENTS_SUCCESS, payload: res.data })
