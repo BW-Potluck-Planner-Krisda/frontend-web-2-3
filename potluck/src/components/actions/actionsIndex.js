@@ -61,3 +61,22 @@ export const postingRegistration = (credentials) => (dispatch) => {
             dispatch({ type: POSTING_REGISTRATION_ERROR, payload: err })
         })
 }
+
+export const PUTTING_ADDEVENT_START = 'PUTTING_ADDEVENT_START';
+export const PUTTING_ADDEVENT_SUCCESS = 'PUTTING_ADDEVENT_SUCCESS';
+export const PUTTING_ADDEVENT_ERROR = 'PUTTING_ADDEVENT_ERROR';
+
+export const puttingAddEvent = (additions) => (dispatch) => {
+    dispatch({type: PUTTING_ADDEVENT_START})
+    axiosWithAuth()
+    .put('https://reqres.in/api/users/2', additions)
+    .then(res => {
+        console.log('from puttingAddEvent: start', res)
+        dispatch({type: PUTTING_ADDEVENT_SUCCESS, payload: res.data})
+        window.location.href='/singleEvent'
+    })
+    .catch(err => {
+        console.error('from puttingAddEvent: error', err)
+        dispatch({type: PUTTING_ADDEVENT_ERROR, payload: err})
+    })
+}

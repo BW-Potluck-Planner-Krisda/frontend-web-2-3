@@ -1,5 +1,7 @@
-import {FETCHING_EVENTS_START,FETCHING_EVENTS_SUCCESS,FETCHING_EVENTS_ERROR, 
-    POSTING_LOGIN_START,POSTING_LOGIN_SUCCESS,POSTING_LOGIN_ERROR, POSTING_REGISTRATION_START,POSTING_REGISTRATION_SUCCESS,POSTING_REGISTRATION_ERROR} from '../actions/actionsIndex';
+import {
+    FETCHING_EVENTS_START, FETCHING_EVENTS_SUCCESS, FETCHING_EVENTS_ERROR,
+    POSTING_LOGIN_START, POSTING_LOGIN_SUCCESS, POSTING_LOGIN_ERROR, POSTING_REGISTRATION_START, POSTING_REGISTRATION_SUCCESS, POSTING_REGISTRATION_ERROR, PUTTING_ADDEVENT_START, PUTTING_ADDEVENT_SUCCESS, PUTTING_ADDEVENT_ERROR
+} from '../actions/actionsIndex';
 
 export const initialState = {
     data: [],
@@ -11,11 +13,11 @@ export const initialState = {
 };
 
 export const dataReducer = (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case FETCHING_EVENTS_START:
             return {
                 ...state,
-                isFetching:true
+                isFetching: true
             }
         case FETCHING_EVENTS_SUCCESS:
             return {
@@ -68,8 +70,27 @@ export const dataReducer = (state = initialState, action) => {
                 isPosting: false,
                 error: action.payload
             }
-            default:
-                return state
+        case PUTTING_ADDEVENT_START:
+            return {
+                ...state,
+                isPutting: true,
+                data: [...state, state.data]
+            }
+        case PUTTING_ADDEVENT_SUCCESS:
+            return {
+                ...state,
+                isPutting: false,
+                data: action.payload,
+                error: ''
+            }
+        case PUTTING_ADDEVENT_ERROR:
+            return {
+                ...state,
+                isPutting: false,
+                error: action.payload
+            }
+        default:
+            return state
     }
 
 }
