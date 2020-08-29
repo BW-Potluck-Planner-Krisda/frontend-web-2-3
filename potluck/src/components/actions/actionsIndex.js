@@ -62,21 +62,21 @@ export const postingRegistration = (credentials) => (dispatch) => {
         })
 }
 
-export const PUTTING_ADDEVENT_START = 'PUTTING_ADDEVENT_START';
-export const PUTTING_ADDEVENT_SUCCESS = 'PUTTING_ADDEVENT_SUCCESS';
-export const PUTTING_ADDEVENT_ERROR = 'PUTTING_ADDEVENT_ERROR';
+export const POSTING_ADDEVENT_START = 'POSTING_ADDEVENT_START';
+export const POSTING_ADDEVENT_SUCCESS = 'POSTING_ADDEVENT_SUCCESS';
+export const POSTING_ADDEVENT_ERROR = 'POSTING_ADDEVENT_ERROR';
 
-export const puttingAddEvent = (additions) => (dispatch) => {
-    dispatch({type: PUTTING_ADDEVENT_START})
+export const postingAddEvent = (additions) => (dispatch) => {
+    dispatch({type: POSTING_ADDEVENT_START})
     axiosWithAuth()
-    .put('https://reqres.in/api/users/2', additions)
+    .post('https://reqres.in/api/users', additions)
     .then(res => {
-        console.log('from puttingAddEvent: start', res)
-        dispatch({type: PUTTING_ADDEVENT_SUCCESS, payload: res.data})
+        console.log('from postingAddEvent: start', res)
+        dispatch({type: POSTING_ADDEVENT_SUCCESS, payload: res.data})
         window.location.href='/singleEvent'
     })
     .catch(err => {
-        console.error('from puttingAddEvent: error', err)
-        dispatch({type: PUTTING_ADDEVENT_ERROR, payload: err})
+        console.error('from postingAddEvent: error', err)
+        dispatch({type: POSTING_ADDEVENT_ERROR, payload: err})
     })
 }

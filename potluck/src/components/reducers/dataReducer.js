@@ -1,10 +1,10 @@
 import {
     FETCHING_EVENTS_START, FETCHING_EVENTS_SUCCESS, FETCHING_EVENTS_ERROR,
-    POSTING_LOGIN_START, POSTING_LOGIN_SUCCESS, POSTING_LOGIN_ERROR, POSTING_REGISTRATION_START, POSTING_REGISTRATION_SUCCESS, POSTING_REGISTRATION_ERROR, PUTTING_ADDEVENT_START, PUTTING_ADDEVENT_SUCCESS, PUTTING_ADDEVENT_ERROR
+    POSTING_LOGIN_START, POSTING_LOGIN_SUCCESS, POSTING_LOGIN_ERROR, POSTING_REGISTRATION_START, POSTING_REGISTRATION_SUCCESS, POSTING_REGISTRATION_ERROR, POSTING_ADDEVENT_START, POSTING_ADDEVENT_SUCCESS, POSTING_ADDEVENT_ERROR
 } from '../actions/actionsIndex';
 
 export const initialState = {
-    data: [],
+    data: {},
     isFetching: false,
     isPosting: false,
     isPutting: false,
@@ -36,7 +36,7 @@ export const dataReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isPosting: true,
-                data: [...state.data]
+                data: {...state.data}
             }
         case POSTING_LOGIN_SUCCESS:
             return {
@@ -55,7 +55,7 @@ export const dataReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isPosting: true,
-                data: [...state.data]
+                data: {...state.data}
             }
         case POSTING_REGISTRATION_SUCCESS:
             return {
@@ -70,23 +70,23 @@ export const dataReducer = (state = initialState, action) => {
                 isPosting: false,
                 error: action.payload
             }
-        case PUTTING_ADDEVENT_START:
+        case POSTING_ADDEVENT_START:
             return {
                 ...state,
-                isPutting: true,
-                data: [...state, state.data]
+                isPosting: true,
+                data: {...state.data}
             }
-        case PUTTING_ADDEVENT_SUCCESS:
+        case POSTING_ADDEVENT_SUCCESS:
             return {
                 ...state,
-                isPutting: false,
+                isPosting: false,
                 data: action.payload,
                 error: ''
             }
-        case PUTTING_ADDEVENT_ERROR:
+        case POSTING_ADDEVENT_ERROR:
             return {
                 ...state,
-                isPutting: false,
+                isPosting: false,
                 error: action.payload
             }
         default:

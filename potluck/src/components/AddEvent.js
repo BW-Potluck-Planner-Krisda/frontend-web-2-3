@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import { axiosWithAuth } from '../utils/axiosWithAuth';
 import { connect } from 'react-redux';
-import { puttingAddEvent } from './actions/actionsIndex';
+import { postingAddEvent } from './actions/actionsIndex';
 
 const AddEvent = (props) => {
     const [event, setEvent] = useState({
@@ -39,7 +39,7 @@ const AddEvent = (props) => {
             dessert: event.dessert,
             rsvp: event.rsvp
         };
-        props.puttingAddEvent(additions)
+        props.postingAddEvent(additions)
 
     }
 
@@ -59,7 +59,7 @@ const AddEvent = (props) => {
     return (
         <div className='addform'>
             <form className='form'>
-                <label className='label' htmlFor='name'> Name</label>
+                <label className='label' for='name'> Name</label>
                 <input
                     className='input'
                     type='text'
@@ -67,7 +67,7 @@ const AddEvent = (props) => {
                     placeholder=' Name here'
                     value={event.name}
                     onChange={handleChanges} />
-                <label className='label' htmlFor='occassion'>Occassion</label>
+                <label className='label' for='occassion'>Occassion</label>
                 <input
                     className='input'
                     type='text'
@@ -142,7 +142,7 @@ const mapStateToProps = state => {
 export default connect(
     mapStateToProps,
     {
-        puttingAddEvent
+        postingAddEvent
     }
 )(AddEvent);
 
