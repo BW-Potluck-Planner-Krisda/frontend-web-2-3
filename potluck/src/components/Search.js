@@ -64,7 +64,7 @@ const Search = (props) => {
           value={searchTerm}
           onChange={handleChange}
         />
-        <button>search</button>
+        <button onClick={handleSubmit}>search</button>
       </form>
 
       <div>
