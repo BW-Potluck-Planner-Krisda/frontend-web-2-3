@@ -7,13 +7,20 @@ const AddEvent = () => {
         time: '',
         date: '',
         occassion: '',
-        username: '',
-        food: '',
+        name: '',
+        email:'',
+        food: false,
+        beverages: false,
+        dessert:false,
         rsvp: false
     })
 
     const handleChanges = (e) => {
         setEvent({...event, [e.target.name]: e.target.value})
+    }
+
+    const handleCheckBoxes = (e) => {
+        setEvent({ ...event, [e.target.name]: e.target.checked})
     }
 
     // const handleSubmit = (e) => {
@@ -28,13 +35,13 @@ const AddEvent = () => {
     return(
         <div className='addform'>
             <form className='form'>
-                <label className='label' htmlFor='username'>User Name</label>
+                <label className='label' htmlFor='name'> Name</label>
                 <input
                     className='input'
                     type='text'
-                    name='username'
-                    placeholder='User Name here'
-                    value={event.username}
+                    name='name'
+                    placeholder=' Name here'
+                    value={event.name}
                     onChange={handleChanges} />
                 <label className='label' htmlFor='occassion'>Occassion</label>
                 <input
@@ -68,15 +75,29 @@ const AddEvent = () => {
                     placeholder='Time'
                     value={event.time}
                     onChange={handleChanges} />
-                <label className='label' htmlFor='food'>Guests Will Bring</label>
-                <textarea className='Txtarea'
+                <label className='label' htmlFor='bring'>Guests Will Bring</label>
+                <label  for="bev">Beverages
+  <input type="checkbox" id="bev" name="bev" value= {event.beverages} onChange={handleCheckBoxes} />
+                </label>
+                <label  for="food">Food(main course & sides)
+  <input type="checkbox" id="food" name="food" value={event.food} onChange={handleCheckBoxes}/>
+                </label>
+                <label  for="des">Desserts
+  <input type="checkbox" id="des" name="des" value={event.dessert} onChange={handleCheckBoxes}/>
+                </label>
+                <label className='label'  for="rsvp">Would you like your guests to RSVP?
+  <input type="checkbox" id="rsvp" name="rsvp" value="rsvp" onChange={handleCheckBoxes}/>
+                </label>
+                { (event.rsvp === true) ?
+                 (<label className='label' htmlFor='email'>Email
+                 <input
+                    className='input'
                     type='text'
-                    name='food'
-                    placeholder='Food to Bring'
-                    value={event.food}
+                    name='email'
+                    placeholder='Email for RSVP contact'
+                    value={event.email}
                     onChange={handleChanges} />
-                    
-
+                    </label>) : (null) }
                 <button className='btn'>Create Event</button>
             </form>
         </div>

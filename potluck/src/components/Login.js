@@ -3,7 +3,6 @@ import axios from "axios";
 import * as yup from "yup";
 import { connect } from 'react-redux';
 import { postingLogin } from './actions/actionsIndex';
-// import { useHistory } from 'react-router-dom';
 
 const Schema = yup.object().shape({
   username: yup
@@ -13,7 +12,7 @@ const Schema = yup.object().shape({
   password: yup.string().required("Please enter your password"),
 });
 
-function Login() {
+function Login(props) {
   //setting up state
 
   const [buttonDisabled, setButtonDisabled] = useState("");
@@ -28,14 +27,15 @@ function Login() {
     password: "",
   });
 
-  // const history = useHistory();
-
   const onSubmit = (e) => {
     e.preventDefault();
     setFormState({ username: "", password: "", remember: false });
     console.log("form submitted!");
-    postingLogin();
-    // history.push('/')
+    const credentials = {
+      username: formState.username,
+      password: formState.password
+    }
+    props.postingLogin(credentials);
 
     // axios
     //   .post("https://reqres.in/api/users", formState)

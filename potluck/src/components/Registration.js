@@ -4,8 +4,8 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 // import { axiosWithAuth } from './utils/axiosWithAuth';
 import { useHistory } from 'react-router-dom';
-import {connect} from 'react-redux';
-import {postingRegistration} from './actions/actionsIndex';
+import { connect } from 'react-redux';
+import { postingRegistration } from './actions/actionsIndex';
 // need an api to sends data and fetch from
 
 //second route from App "/Registration"
@@ -23,7 +23,7 @@ const Schema = yup.object().shape({
   password: yup.string().required("Please enter your password").min(6),
 });
 
-function Registration() {
+function Registration(props) {
   //react hook form
 
   const { reset, register } = useForm({});
@@ -49,9 +49,8 @@ function Registration() {
   });
 
   //   onSubmit function
-  const history = useHistory();
 
-  const onSubmit = (e, credentials) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     setFormState({
       name: "",
@@ -61,15 +60,18 @@ function Registration() {
       password: "",
     });
     console.log("form submitted!");
-    postingRegistration(credentials);
+    const credentials = {
+      email: formState.email,
+      password: formState.password
+    }
+    props.postingRegistration(credentials);
     // axios
     //   .post("https://reqres.in/api/users", formState)
     //   .then((res) => {
     //     console.log("success!!!", res.data);
-        history.push('/Login')
-      }
-      // .catch((err) => console.log("Failed", err));
-  
+  }
+  // .catch((err) => console.log("Failed", err));
+
 
   const validate = (e) => {
     yup

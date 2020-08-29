@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Link, Switch } from "react-router-dom";
 
@@ -24,20 +24,20 @@ const App = () => {
     <div className="App">
       <div>
         <Navigation />
+
       </div>
 
       <Switch>
-        
-      <Route path="/Login">
+        <Route exact path="/Login">
           <Login />
         </Route>
-        <Route path="/">
+        <Route exact path="/">
           <Registration />
         </Route>
-        
 
-        <PrivateRoute exact path="/Event">
-          <Event />
+
+        <PrivateRoute exact path="/singleEvent">
+          <Display />
         </PrivateRoute>
 
         <PrivateRoute exact path="/Search">
