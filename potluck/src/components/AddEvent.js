@@ -131,8 +131,16 @@ const AddEvent = (props) => {
 
 }
 
+const mapStateToProps = state => {
+    return{
+    data: state.data,
+    isPutting: state.isPutting,
+    error: state.error
+    }
+}
+
 export default connect(
-    null,
+    mapStateToProps,
     {
         puttingAddEvent
     }
