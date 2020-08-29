@@ -13,11 +13,11 @@ function Home(props) {
       <div className='home'>
         <div className='saved'>
           <h2>Saved Events</h2>
-          {props.data === [] ? (<p>No Saved Events</p>) : (
+          {props.data === null ? <p>No Saved Events</p> : (
           props.data.map(saved => {
             return (
               <ul>
-                <li key={saved.id} title={saved.title} date={saved.date}></li>
+                <li key={saved.id} title={saved.title} date={saved.date}> username={saved.username}</li>
               </ul>)
           })
           )}

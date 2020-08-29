@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import * as yup from "yup";
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { axiosWithAuth } from './utils/axiosWithAuth';
+// import { axiosWithAuth } from './utils/axiosWithAuth';
 import { useHistory } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {postingRegistration} from './actions/actionsIndex';
 // need an api to sends data and fetch from
 
 //second route from App "/Registration"
@@ -49,7 +51,7 @@ function Registration() {
   //   onSubmit function
   const history = useHistory();
 
-  const onSubmit = (e) => {
+  const onSubmit = (e, credentials) => {
     e.preventDefault();
     setFormState({
       name: "",
@@ -59,14 +61,15 @@ function Registration() {
       password: "",
     });
     console.log("form submitted!");
-    axiosWithAuth()
-      .post("https://reqres.in/api/users", formState)
-      .then((res) => {
-        console.log("success!!!", res.data);
+    postingRegistration(credentials);
+    // axios
+    //   .post("https://reqres.in/api/users", formState)
+    //   .then((res) => {
+    //     console.log("success!!!", res.data);
         history.push('/Login')
-      })
-      .catch((err) => console.log("Failed", err));
-  };
+      }
+      // .catch((err) => console.log("Failed", err));
+  
 
   const validate = (e) => {
     yup
@@ -177,4 +180,9 @@ function Registration() {
   );
 }
 
-export default Registration;
+export default connect(
+  null,
+  {
+    postingRegistration
+  }
+)(Registration);

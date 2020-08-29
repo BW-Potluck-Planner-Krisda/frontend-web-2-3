@@ -1,5 +1,5 @@
 import {FETCHING_EVENTS_START,FETCHING_EVENTS_SUCCESS,FETCHING_EVENTS_ERROR, 
-    POSTING_LOGIN_START,POSTING_LOGIN_SUCCESS,POSTING_LOGIN_ERROR} from '../actions/actionsIndex';
+    POSTING_LOGIN_START,POSTING_LOGIN_SUCCESS,POSTING_LOGIN_ERROR, POSTING_REGISTRATION_START,POSTING_REGISTRATION_SUCCESS,POSTING_REGISTRATION_ERROR} from '../actions/actionsIndex';
 
 export const initialState = {
     data: [],
@@ -44,6 +44,25 @@ export const dataReducer = (state = initialState, action) => {
                 error: ''
             }
         case POSTING_LOGIN_ERROR:
+            return {
+                ...state,
+                isPosting: false,
+                error: action.payload
+            }
+        case POSTING_REGISTRATION_START:
+            return {
+                ...state,
+                isPosting: true,
+                data: [...state.data]
+            }
+        case POSTING_REGISTRATION_SUCCESS:
+            return {
+                ...state,
+                isPosting: false,
+                data: action.payload,
+                error: ''
+            }
+        case POSTING_REGISTRATION_ERROR:
             return {
                 ...state,
                 isPosting: false,
