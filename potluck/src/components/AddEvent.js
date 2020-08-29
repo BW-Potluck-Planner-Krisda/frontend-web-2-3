@@ -23,6 +23,14 @@ const AddEvent = () => {
         setEvent({ ...event, [e.target.name]: e.target.checked})
     }
 
+    const handleCreate = e => {
+        e.preventDefault();
+    }
+
+    const handleEdit =e => {
+        e.preventDefault();
+    }
+
     // const handleSubmit = (e) => {
     //     axiosWithAuth()
     //         .post('', event)
@@ -98,7 +106,8 @@ const AddEvent = () => {
                     value={event.email}
                     onChange={handleChanges} />
                     </label>) : (null) }
-                <button className='btn'>Create Event</button>
+                <button className='btn' onClick={handleCreate}>Create Event</button>
+                <button className='btn' onClick={handleEdit}>Edit Event</button>
             </form>
         </div>
     )
