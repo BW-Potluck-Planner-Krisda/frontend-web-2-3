@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import * as yup from "yup";
 import axios from "axios";
+import * as yup from "yup";
 
 const Schema = yup.object().shape({
   name: yup.string().required("Name is a required field"),
@@ -21,18 +21,22 @@ function Registration() {
   const [buttonDisabled, setButtonDisabled] = useState("");
 
   const [formState, setFormState] = useState({
+    name: "",
+    email: "",
     username: "",
     password: "",
   });
 
   const [errorState, setErrorState] = useState({
+    name: "",
+    email: "",
     username: "",
     password: "",
   });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setFormState({ username: "", password: "", remember: false });
+    setFormState({ name: "", email: "", username: "", password: "" });
     console.log("form submitted!");
     axios
       .post("https://reqres.in/api/users", formState)

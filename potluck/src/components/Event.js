@@ -3,6 +3,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as yup from "yup";
+import { Link, Route, Switch } from "react-router-dom";
+
+//importing guest and home components
+
+import Guest from "./Guest";
+import Home from "./Home";
 
 // setting up schema validation
 
@@ -376,18 +382,34 @@ function Event() {
       <br></br>
 
       <label htmlFor="what">
-        What do you need to be brought?
+        What dishes do you request?
         <input
           type="text"
           name="what"
           value={formState.what}
-          placeholder="What do you need attendees to supply?"
+          placeholder="Dishes requested"
           onChange={onChange}
         />
       </label>
 
       <br></br>
-      <button type="submit">Submit</button>
+      <button disabled={buttonDisabled} type="submit">
+        Submit
+      </button>
+
+      <div>
+        <Route path="/Home">
+          <Event />
+        </Route>
+        <Route exact path="/Guest">
+          <Guest />
+        </Route>
+
+        <h3>Not the Host? </h3>
+        <Link to="/Guest">Guest</Link>
+        <span> </span>
+        <Link to="/Host">Home</Link>
+      </div>
     </form>
   );
 }

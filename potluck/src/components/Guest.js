@@ -115,7 +115,7 @@ function Guest() {
       <br></br>
 
       <label htmlFor="bringing">
-        What whill you bring??
+        What will you bring??
         <input
           type="text"
           name="bringing"
