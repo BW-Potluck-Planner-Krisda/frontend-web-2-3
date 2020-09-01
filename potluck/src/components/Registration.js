@@ -1,11 +1,8 @@
-
 import React, { useState, useEffect } from "react";
 import * as yup from "yup";
-import axios from "axios";
 import { useForm } from "react-hook-form";
-// need an api to sends data and fetch from
-
-//second route from App "/Registration"
+import { connect } from 'react-redux';
+import { postingRegistration } from './actions/actionsIndex';
 
 const Schema = yup.object().shape({
   name: yup.string().required("Name is a required field"),
@@ -20,7 +17,7 @@ const Schema = yup.object().shape({
   password: yup.string().required("Please enter your password").min(6),
 });
 
-function Registration() {
+function Registration(props) {
   //react hook form
 
   const { reset, register } = useForm({});
@@ -49,12 +46,26 @@ function Registration() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setFormState({
+      name: "",
+      value: "",
+      email: "",
+      username: "",
+      password: "",
+    });
     console.log("form submitted!");
-    axios
-      .post("https://reqres.in/api/users", formState)
-      .then((res) => console.log("success!!!", res.data))
-      .catch((err) => console.log("Failed", err));
-  };
+    const credentials = {
+      email: formState.email,
+      password: formState.password
+    }
+    props.postingRegistration(credentials);
+    // axios
+    //   .post("https://reqres.in/api/users", formState)
+    //   .then((res) => {
+    //     console.log("success!!!", res.data);
+  }
+  // .catch((err) => console.log("Failed", err));
+
 
   const validate = (e) => {
     yup
@@ -99,10 +110,10 @@ function Registration() {
   }, [formState]);
 
   return (
-    // setting up form
-
-    <form onSubmit={onSubmit}>
-      <label htmlFor="name">
+    <>
+    <h1 className='heading'>Registeration</h1>
+    <form  className ='regForm' onSubmit={onSubmit}>
+      <label className='reglabel' htmlFor="name">
         Name
         <input
           type="text"
@@ -116,7 +127,7 @@ function Registration() {
         ) : null}
       </label>
 
-      <label htmlFor="email">
+      <label className='reglabel' htmlFor="email">
         Email
         <input
           type="email"
@@ -130,7 +141,7 @@ function Registration() {
         ) : null}
       </label>
 
-      <label htmlFor="username">
+      <label className='reglabel' htmlFor="username">
         Username
         <input
           type="text"
@@ -144,7 +155,7 @@ function Registration() {
         ) : null}
       </label>
 
-      <label htmlFor="password">
+      <label className='reglabel' htmlFor="password">
         Password
         <input
           type="password"
@@ -158,11 +169,17 @@ function Registration() {
         ) : null}
       </label>
 
-      <button type="submit" onClick={() => reset()}>
+      <button className='btn' type="submit" onClick={() => reset()}>
         Submit
       </button>
     </form>
-  )
+    </>
+  );
 }
 
-export default Registration;
+export default connect(
+  null,
+  {
+    postingRegistration
+  }
+)(Registration);

@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-// import { BrowserRouter as Router } from "react-router-dom";
-import { Route, Link, Switch } from "react-router-dom";
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 
-//import styled from "styled-components";
 import "./App.css";
 
 // Components
@@ -10,38 +8,12 @@ import Login from "./components/Login";
 import Registration from "./components/Registration";
 import Home from "./components/Home";
 import Navigation from "./components/Navigation";
-import Event from "./components/Event";
 import Search from "./components/Search";
 import Display from "./components/Display";
+import PrivateRoute from './components/utils/PrivateRoute';
+import AddEvent from './components/AddEvent';
 
 const App = () => {
-  //? Regular Route Version
-  //   return (
-  //     <div className="App">
-  //       <Navigation />
-
-  //       <Route path="/registration">
-  //         <Registration />
-  //       </Route>
-
-  //       <Route path="/Login">
-  //         <Login />
-  //       </Route>
-
-  //       <Route path="/Event">
-  //         <Event />
-  //       </Route>
-
-  //       <Route path="/Search">
-  //         <Search />
-  //       </Route>
-
-  //       <Route exact path="/">
-  //         <Home />
-  //       </Route>
-  //     </div>
-  //   );
-  // };
 
   return (
     // todo: Switch Version
@@ -49,27 +21,33 @@ const App = () => {
     <div className="App">
       <div>
         <Navigation />
+
       </div>
 
       <Switch>
-        <Route path="/registration">
-          <Registration />
-        </Route>
-        <Route path="/Login">
+        <Route exact path="/Login">
           <Login />
         </Route>
-
-        <Route path="/Event">
-          <Event />
+        <Route exact path="/">
+          <Registration />
         </Route>
 
-        <Route path="/Search">
+
+        <PrivateRoute exact path="/singleEvent">
+          <Display />
+        </PrivateRoute>
+
+        <PrivateRoute exact path="/Search">
           <Search />
-        </Route>
+        </PrivateRoute>
 
-        <Route path="/">
+        <PrivateRoute exact path='/addevent'>
+          <AddEvent />
+        </PrivateRoute>
+
+        <PrivateRoute exact path="/home">
           <Home />
-        </Route>
+        </PrivateRoute>
       </Switch>
     </div>
   );

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import * as yup from "yup";
-import { useForm } from "react-hook-form";
-
-// first route from app "/"
+import { connect } from 'react-redux';
+import { postingLogin } from './actions/actionsIndex';
 
 const Schema = yup.object().shape({
   username: yup
@@ -13,11 +11,7 @@ const Schema = yup.object().shape({
   password: yup.string().required("Please enter your password"),
 });
 
-function Login() {
-  // hook form
-
-  const { reset } = useForm({});
-
+function Login(props) {
   //setting up state
 
   const [buttonDisabled, setButtonDisabled] = useState("");
@@ -34,11 +28,18 @@ function Login() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setFormState({ username: "", password: "", remember: false });
     console.log("form submitted!");
-    axios
-      .post("https://reqres.in/api/users", formState)
-      .then((res) => console.log("Success!!!", res.data))
-      .catch((err) => console.log("Failed", err));
+    const credentials = {
+      username: formState.username,
+      password: formState.password
+    }
+    props.postingLogin(credentials);
+
+    // axios
+    //   .post("https://reqres.in/api/users", formState)
+    //   .then((res) => console.log("Success!!!", res.data))
+    //   .catch((err) => console.log("Failed", err));
   };
 
   const validate = (e) => {
@@ -63,11 +64,12 @@ function Login() {
   const onChange = (e) => {
     e.persist();
     console.log("input changed", e.target.value);
+
     const newFormData = {
       ...formState,
-      [e.target.name]:
-        e.target.type === "checkbox" ? e.target.checked : e.target.value,
+      [e.target.name]: e.target.value,
     };
+
     validate(e);
     setFormState(newFormData);
   };
@@ -79,42 +81,55 @@ function Login() {
   }, [formState]);
 
   return (
-    <form onSubmit={onSubmit}>
-      <label htmlFor="username">
-        Username
+    <>
+      <h1 className='heading'>Log In</h1>
+      <form onSubmit={onSubmit}>
+        <label htmlFor="username">
+          Username
         <input
-          type="text"
-          name="username"
-          value={formState.username}
-          placeholder="Please enter username"
-          onChange={onChange}
-        />
-        {errorState.username.length > 0 ? (
-          <p className="error">{errorState.username}</p>
-        ) : null}
-      </label>
+            type="text"
+            name="username"
+            value={formState.username}
+            placeholder="Please enter username"
+            onChange={onChange}
+          />
+          {errorState.username.length > 0 ? (
+            <p className="error">{errorState.username}</p>
+          ) : null}
+        </label>
 
-      <label htmlFor="password">
-        Password
+        <label htmlFor="password">
+          Password
         <input
-          type="password"
-          name="password"
-          value={formState.password}
-          placeholder="Please enter password"
-          onChange={onChange}
-        />
-        {errorState.password.length > 0 ? (
-          <p classname="error">{errorState.password}</p>
-        ) : null}
-      </label>
+            type="password"
+            name="password"
+            value={formState.password}
+            placeholder="Please enter password"
+            onChange={onChange}
+          />
+          {errorState.password.length > 0 ? (
+            <p classname="error">{errorState.password}</p>
+          ) : null}
+        </label>
 
-      <button type="submit" disabled={buttonDisabled} onClick={() => reset()}>
-        Submit
+        <button className='btn' type="submit" disabled={buttonDisabled}>
+          Submit
       </button>
-    </form>
-  )
-};
+      </form>
+    </>
+  );
+}
 
-export default Login;
-
-
+const mapStateToProps = state => {
+  return {
+    data: state.data,
+    isPosting: state.isPosting,
+    error: state.error
+  }
+}
+export default connect(
+  mapStateToProps,
+  {
+    postingLogin
+  }
+)(Login);
