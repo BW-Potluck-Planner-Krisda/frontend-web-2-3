@@ -52,7 +52,6 @@ export const postingRegistration = (credentials) => (dispatch) => {
     dispatch({ type: POSTING_REGISTRATION_START })
     axios.post('https://reqres.in/api/register', credentials)
         .then(res => {
-            console.log('from postingRegistration:start', res)
             dispatch({ type: POSTING_REGISTRATION_SUCCESS, payload: res.data })
             window.location.href = '/Login'
         })

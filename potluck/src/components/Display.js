@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { axiosWithAuth } from "./utils/axiosWithAuth";
-import { deletingEvent } from "./actions/actionsIndex";
+import {connect} from 'react-redux';
+import {deletingEvent} from './actions/actionsIndex';
 
 function Display(props) {
   const [formHeader, SetFormHeader] = useState({
@@ -83,9 +83,6 @@ function Display(props) {
     otherDesInput: '',
   });
 
-  const [editing, setEditing] = useState(false);
-  const [eventToEdit, setEventToEdit] = useState({})
-
   const handleInputs = e => {
     setBringBev({ [e.target.name]: e.target.value });
     setBringFood({ [e.target.name]: e.target.value });
@@ -98,14 +95,12 @@ function Display(props) {
     setBringDes({ [e.target.name]: e.target.checked })
   }
 
-  const handleEdit = e => {
-    e.preventDefault();
-    
-  };
-  
   const handleSave = e => {
     e.preventDefault();
-  
+  }
+
+  const handleEdit = e => {
+    e.preventDefault();
   };
 
   const handleDelete = e => {
@@ -120,16 +115,16 @@ function Display(props) {
         <h2>Jenni & Allen Vest</h2>
         <h2>Annual Celebration</h2>
         <h3> 123 E. Main St, DeSoto, MO 63020<br></br> <span>Friday, June 15. 2021 5:45PM</span></h3>
-        <label for="rsvp">RSVP:
-        <select id="rsvp" name="rsvp">
+        <label htmlFor="rsvp">RSVP:
+        <select id="rsvpDrop" name="rsvp">
             <option value="choose">please choose</option>
             <option value="yes">YES</option>
             <option value="no">NO</option>
             <option value="maybe">maybe</option>
           </select>
         </label><br></br>
-        <label for='attending'>how many in your group?
-        <select id="attending" name="attending">
+        <label htmlFor='attending'>how many in your group?
+        <select id="attendingDrop" name="attending">
             <option value="choose">please choose</option>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -146,12 +141,12 @@ function Display(props) {
           <form className='form'>
             <h3>Beverages</h3>
             <p>*No Adult Beverages Please*</p>
-            <label style={{ fontWeight: 'bold' }} for="bev1"> 2 liter of Coke
-  <input type="checkbox" id="bev1" name="bev1" value={bringBev.bev1}
+            <label style={{ fontWeight: 'bold' }} htmlFor="bev1"> 2 liter of Coke
+  <input type="checkbox" id="bev1Check" name="bev1" value={bringBev.bev1}
                 onChange={handleCheckBoxes} />
             </label>
-            <label for="qnty">how many?:</label>
-            <select className='select' id="qnty" name="qnty">
+            <label htmlFor="qnty">how many?:</label>
+            <select className='select' id="qnty1Drop" name="qnty">
               <option value="choose">please choose</option>
               <option value={bringBev.coke1}>1</option>
               <option value={bringBev.coke2}>2</option>
@@ -159,12 +154,12 @@ function Display(props) {
               <option value={bringBev.coke4}>4</option>
             </select>
 
-            <label style={{ fontWeight: 'bold' }} for="bev2"> 2 liter of Sprite
-  <input type="checkbox" id="bev2" name="bev2" value={bringBev.bev2}
+            <label style={{ fontWeight: 'bold' }} htmlFor="bev2"> 2 liter of Sprite
+  <input type="checkbox" id="bev2Check" name="bev2" value={bringBev.bev2}
                 onChange={handleCheckBoxes} />
             </label>
-            <label for="qnty">how many?:</label>
-            <select className='select' id="qnty" name="qnty">
+            <label htmlFor="qnty">how many?:</label>
+            <select className='select' id="qnty2Drop" name="qnty">
               <option value="choose">please choose</option>
               <option value={bringBev.sprite1}>1</option>
               <option value={bringBev.sprite2}>2</option>
@@ -172,12 +167,12 @@ function Display(props) {
               <option value={bringBev.sprite4}>4</option>
             </select>
 
-            <label style={{ fontWeight: 'bold' }} for="bev3"> 2 liter of Dr. Pepper
-  <input type="checkbox" id="bev3" name="bev3" value={bringBev.bev3}
+            <label style={{ fontWeight: 'bold' }} htmlFor="bev3"> 2 liter of Dr. Pepper
+  <input type="checkbox" id="bev3Check" name="bev3" value={bringBev.bev3}
                 onChange={handleCheckBoxes} />
             </label>
-            <label for="qnty">how many?:</label>
-            <select className='select' id="qnty" name="qnty">
+            <label htmlFor="qnty">how many?:</label>
+            <select className='select' id="qnty3Drop" name="qnty">
               <option value="choose">please choose</option>
               <option value={bringBev.dp1}>1</option>
               <option value={bringBev.dp2}>2</option>
@@ -185,12 +180,12 @@ function Display(props) {
               <option value={bringBev.dp4}>4</option>
             </select>
 
-            <label style={{ fontWeight: 'bold' }} for="bev4"> 2 liter of Pepsi
-  <input type="checkbox" id="bev4" name="bev4" value={bringBev.bev4}
+            <label style={{ fontWeight: 'bold' }} htmlFor="bev4"> 2 liter of Pepsi
+  <input type="checkbox" id="bev4Check" name="bev4" value={bringBev.bev4}
                 onChange={handleCheckBoxes} />
             </label>
-            <label for="qnty">how many?:</label>
-            <select className='select' id="qnty" name="qnty">
+            <label htmlFor="qnty">how many?:</label>
+            <select className='select' id="qntyDrop" name="qnty">
               <option value="choose">please choose</option>
               <option value={bringBev.pepsi1}>1</option>
               <option value={bringBev.pepsi2}>2</option>
@@ -198,11 +193,11 @@ function Display(props) {
               <option value={bringBev.pepsi4}>4</option>
             </select>
 
-            <label style={{ fontWeight: 'bold' }} for="otherBev"> Other
-  <input type="checkbox" id="otherBev" name="otherBev" value={bringBev.otherBev}
+            <label style={{ fontWeight: 'bold' }} htmlFor="otherBev"> Other
+  <input type="checkbox" id="otherBevCheck" name="otherBev" value={bringBev.otherBev}
                 onChange={handleCheckBoxes} />
             </label>
-            <select className='select' id="other" name="other">
+            <select className='select' id="otherBevDrop" name="other">
               <option value="choose">please choose</option>
               <option value={bringBev.sweet}>Sweet Tea</option>
               <option value={bringBev.unsweet}>Tea Unsweetened</option>
@@ -211,7 +206,7 @@ function Display(props) {
             </select>
             <input
               type='text'
-              id='other'
+              id='otherInput'
               name='otherBev'
               placeholder='Other Beverage Name here'
               value={props.otherBev}
@@ -221,59 +216,59 @@ function Display(props) {
         <div className='foodForm'>
           <form className='form'>
             <h3>Food</h3>
-            <label style={{ fontWeight: 'bold' }} for="food1"> Casserole
-  <input type="checkbox" id="food1" name="food1" value={bringFood.casserole}
+            <label style={{ fontWeight: 'bold' }} htmlFor="food1"> Casserole
+  <input type="checkbox" id="food1Check" name="food1" value={bringFood.casserole}
                 onChange={handleCheckBoxes} />
             </label>
             <input
               type='text'
-              id='food1'
+              id='food1Input'
               name='casserole'
               placeholder='Name of Casserole here'
               value={bringFood.food1}
               onChange={handleInputs} />
 
-            <label style={{ fontWeight: 'bold' }} for="food2"> Cole Slaw
-  <input type="checkbox" id="food2" name="food2" value={bringFood.coleSlaw}
+            <label style={{ fontWeight: 'bold' }} htmlFor="food2"> Cole Slaw
+  <input type="checkbox" id="food2Check" name="food2" value={bringFood.coleSlaw}
                 onChange={handleCheckBoxes} />
             </label>
             <input
               type='text'
-              id='food2'
+              id='food2Input'
               name='coleSlaw'
               placeholder='Name & quantity of Slaw here'
               value={bringFood.food2}
               onChange={handleInputs} />
 
-            <label style={{ fontWeight: 'bold' }} for="food3"> Potatoes
-  <input type="checkbox" id="food3" name="food3" value={bringFood.potatoes}
+            <label style={{ fontWeight: 'bold' }} htmlFor="food3"> Potatoes
+  <input type="checkbox" id="food3Check" name="food3" value={bringFood.potatoes}
                 onChange={handleCheckBoxes} />
             </label>
             <input
               type='text'
-              id='food3'
+              id='food3Input'
               name='potatoes'
               placeholder='Name & quantity of Potatoes here'
               value={bringFood.food3}
               onChange={handleInputs} />
 
-            <label style={{ fontWeight: 'bold' }} for="food4"> Vegetables
-  <input type="checkbox" id="food4" name="food4" value={bringFood.vegetables}
+            <label style={{ fontWeight: 'bold' }} htmlFor="food4"> Vegetables
+  <input type="checkbox" id="food4Check" name="food4" value={bringFood.vegetables}
                 onChange={handleCheckBoxes} />
             </label>
             <input
               type='text'
-              id='food4'
+              id='food4Input'
               name='vegetables'
               placeholder='Name & quantity of vegetables here'
               value={bringFood.food4}
               onChange={handleInputs} />
 
-            <label style={{ fontWeight: 'bold' }} for="otherFood"> Other
-  <input type="checkbox" id="otherFood" name="otherFood" value={bringFood.otherFood}
+            <label style={{ fontWeight: 'bold' }} htmlFor="otherFood"> Other
+  <input type="checkbox" id="otherFoodCheck" name="otherFood" value={bringFood.otherFood}
                 onChange={handleCheckBoxes} />
             </label>
-            <select className='select' id="other" name="other">
+            <select className='select' id="otherFoodDrop" name="other">
               <option value="choose">please choose</option>
               <option value={bringFood.potatoChips}>Potato Chips</option>
               <option value={bringFood.hotDogs}>Hot Dogs</option>
@@ -283,7 +278,7 @@ function Display(props) {
             </select>
             <input
               type='text'
-              id='otherFood'
+              id='otherFoodInput'
               name='otherFood'
               placeholder='Other Food Name here'
               value={bringFood.otherFoodInput}
@@ -293,51 +288,51 @@ function Display(props) {
         <div className='desForm'>
           <form className='form'>
             <h3>Desserts</h3>
-            <label style={{ fontWeight: 'bold' }} for="des1"> Pie
+            <label style={{ fontWeight: 'bold' }} htmlFor="des1Input"> Pie
   <input type="checkbox" id="des1" name="des1" value={bringDes.pie}
                 onChange={handleCheckBoxes} />
             </label>
             <input
               type='text'
-              id='des1'
+              id='des1Input'
               name='pie'
               placeholder='Name & quantity of pie here'
               value={bringDes.des1}
               onChange={handleInputs} />
 
 
-            <label style={{ fontWeight: 'bold' }} for="des2"> Cake
+            <label style={{ fontWeight: 'bold' }} htmlFor="cake"> Cake
   <input type="checkbox" id="des2" name="des2" value={bringDes.cake}
                 onChange={handleCheckBoxes} />
             </label>
             <input
               type='text'
-              id='des2'
+              id='cake'
               name='cake'
               placeholder='Name & quantity of cake here'
               value={bringDes.des2}
               onChange={handleInputs} />
 
-            <label style={{ fontWeight: 'bold' }} for="des3"> Ice Cream
+            <label style={{ fontWeight: 'bold' }} htmlFor="des3Input"> Ice Cream
   <input type="checkbox" id="des3" name="des3" value={bringDes.iceCream}
                 onChange={handleCheckBoxes} />
             </label>
             <input
               type='text'
-              id='des3'
-              name='pie'
+              id='des3Input'
+              name='iceCream'
               placeholder='Name & quantity of Ice Cream here'
               value={bringDes.des3}
               onChange={handleInputs} />
 
-            <label style={{ fontWeight: 'bold' }} for="otherDes"> Other
+            <label style={{ fontWeight: 'bold' }} htmlFor="otherDesInput"> Other
   <input type="checkbox" id="otherDes" name="otherDes" value={bringDes.otherDes}
                 onChange={handleCheckBoxes} />
             </label>
 
             <input
               type='text'
-              id='otherDes'
+              id='otherDesInput'
               name='otherDes'
               placeholder='Other Dessert Name & quantity here'
               value={bringDes.otherDesInput}
@@ -352,4 +347,8 @@ function Display(props) {
   )
 }
 
-export default Display;
+export default connect(
+  null,
+{
+  deletingEvent
+}) (Display);

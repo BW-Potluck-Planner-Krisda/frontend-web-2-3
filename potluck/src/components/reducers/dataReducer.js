@@ -1,11 +1,9 @@
 import {
-    FETCHING_EVENTS_START, FETCHING_EVENTS_SUCCESS, FETCHING_EVENTS_ERROR,
-    POSTING_LOGIN_START, POSTING_LOGIN_SUCCESS, POSTING_LOGIN_ERROR, POSTING_REGISTRATION_START, POSTING_REGISTRATION_SUCCESS, POSTING_REGISTRATION_ERROR, POSTING_ADDEVENT_START, POSTING_ADDEVENT_SUCCESS, POSTING_ADDEVENT_ERROR, PUTTING_EDITEVENT_START, PUTTING_EDITEVENT_SUCCESS, PUTTING_EDITEVENT_ERROR, DELETING_EVENT_START, DELETING_EVENT_SUCCESS, DELETING_EVENT_FAILED
+    POSTING_LOGIN_START, POSTING_LOGIN_SUCCESS, POSTING_LOGIN_ERROR, POSTING_REGISTRATION_START, POSTING_REGISTRATION_SUCCESS, POSTING_REGISTRATION_ERROR, POSTING_ADDEVENT_START, POSTING_ADDEVENT_SUCCESS, POSTING_ADDEVENT_ERROR, PUTTING_EDITEVENT_START, PUTTING_EDITEVENT_SUCCESS, PUTTING_EDITEVENT_ERROR, DELETING_EVENT_START,DELETING_EVENT_SUCCESS,DELETING_EVENT_FAILED
 } from '../actions/actionsIndex';
 
 export const initialState = {
     data: {},
-    isFetching: false,
     isPosting: false,
     isPutting: false,
     isDeleting: false,
@@ -14,24 +12,6 @@ export const initialState = {
 
 export const dataReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FETCHING_EVENTS_START:
-            return {
-                ...state,
-                isFetching: true
-            }
-        case FETCHING_EVENTS_SUCCESS:
-            return {
-                ...state,
-                isFetching: false,
-                data: action.payload,
-                error: ''
-            }
-        case FETCHING_EVENTS_ERROR:
-            return {
-                ...state,
-                isFetching: false,
-                error: action.payload
-            }
         case POSTING_LOGIN_START:
             return {
                 ...state,
@@ -68,25 +48,6 @@ export const dataReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isPosting: false,
-                error: action.payload
-            }
-        case DELETING_EVENT_START:
-            return {
-                ...state,
-                isDeleting: true,
-                data: [...state.data]
-            }
-        case DELETING_EVENT_SUCCESS:
-            return {
-                ...state,
-                isDeleting: false,
-                data: action.payload,
-                error: ''
-            }
-        case DELETING_EVENT_FAILED:
-            return {
-                ...state,
-                isDeleting: false,
                 error: action.payload
             }
         case POSTING_ADDEVENT_START:
@@ -127,6 +88,25 @@ export const dataReducer = (state = initialState, action) => {
                 isPutting: false,
                 error: action.payload
             }
+            case DELETING_EVENT_START:
+                return {
+                    ...state,
+                    isDeleting: true,
+                    data: {...state.data}
+                }
+            case DELETING_EVENT_SUCCESS:
+                return {
+                    ...state,
+                    isDeleting: false,
+                    data: action.payload,
+                    error: ''
+                }
+            case DELETING_EVENT_FAILED:
+                return {
+                    ...state,
+                    isDeleting: false,
+                    error: action.payload
+                }
         default:
             return state
     }
