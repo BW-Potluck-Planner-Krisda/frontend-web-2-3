@@ -98,17 +98,17 @@ function Display(props) {
     setBringDes({ [e.target.name]: e.target.checked })
   }
 
-  const handleEdit = item => {
+  const handleEdit = e => {
     e.preventDefault();
     
   };
   
-  const handleSave = item => {
+  const handleSave = e => {
     e.preventDefault();
   
   };
 
-  const handleDelete = item => {
+  const handleDelete = e => {
     e.preventDefault();
     props.deletingEvent();
   };
