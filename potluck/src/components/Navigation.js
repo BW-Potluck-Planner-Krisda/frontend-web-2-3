@@ -1,6 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import styled from "styled-components";
+import potluckLogo from '../potluckLogo.png';
+
 
 const NavContainer = styled.div`
   //! I need to make this more user-friendly
@@ -13,6 +15,11 @@ const NavContainer = styled.div`
   justify-content: space-between;
   background-color: #070707;
   border: 2px solid black;
+
+  img {
+    width: 4%;
+    padding-left:1%;
+  }
 
   h1 {
     color: #eeeeee;
@@ -36,12 +43,14 @@ const Navigation = (props) => {
 
   return (
     <NavContainer>
+      <img src={potluckLogo} alt='colorful background with silver stock pot with four leaf clover sticking out' />
       <h1>POTLUCK PLANNER</h1>
       <nav>
-        <Link to="/">Home</Link>
-        <Link to="/Search">Search</Link>
-        <Link to="/Registration">Registration</Link>
+        <Link to="/home">Home</Link>
+
+        <Link to='/addevent'>Add Event</Link>
         <Link to="/Login">Login</Link>
+        <a href="https://bw-potluck-planner-krisda.github.io/marketing-web-1/">Landing Page</a>
       </nav>
     </NavContainer>
   );
